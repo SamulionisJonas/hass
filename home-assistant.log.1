@@ -1,0 +1,96 @@
+2022-12-20 14:34:18.432 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2022-12-20 14:34:18.435 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration browser_mod which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2022-12-20 14:34:18.438 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration waste_collection_schedule which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2022-12-20 14:34:23.511 ERROR (MainThread) [homeassistant.components.person] Platform person does not generate unique IDs. ID jonas already exists - ignoring person.jonas
+2022-12-20 14:34:35.774 ERROR (SyncWorker_11) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:35.779 ERROR (SyncWorker_0) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:35.806 ERROR (SyncWorker_13) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:35.885 ERROR (SyncWorker_1) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:35.908 ERROR (SyncWorker_9) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:35.974 ERROR (SyncWorker_2) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:36.023 ERROR (SyncWorker_12) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:37.064 ERROR (SyncWorker_7) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:37.076 ERROR (SyncWorker_4) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:38.363 ERROR (SyncWorker_12) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:38.790 ERROR (SyncWorker_8) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:39.346 ERROR (SyncWorker_11) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:34:39.360 WARNING (SyncWorker_11) [homeassistant.components.command_line.sensor] Empty reply found when expecting JSON data
+2022-12-20 14:34:39.822 ERROR (SyncWorker_10) [homeassistant.components.command_line] Command failed (with return code 1): python3 << EOF
+import os, json
+installed = {"repositories": []}
+path = "/config/.storage/hacs/"
+for file in os.listdir(path):
+    name, ext = os.path.splitext(file)
+    if ext == ".hacs":
+        hacs_file = path + file
+        with open(hacs_file, "r") as file:
+            dict = json.load(file)
+            name = dict["data"]["full_name"]
+            installed["repositories"] += [name]
+            file.close()
+print(json.dumps(installed))
+EOF
+2022-12-20 14:34:39.828 WARNING (SyncWorker_10) [homeassistant.components.command_line.sensor] Empty reply found when expecting JSON data
+2022-12-20 14:34:46.561 ERROR (MainThread) [homeassistant.helpers.event] Error while processing template: Template("{{ 100 - states('sensor.mattias_imac_storage') | float }}")
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1710, in forgiving_float_filter
+    return float(value)
+ValueError: could not convert string to float: 'unknown'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 423, in async_render
+    render_result = _render_with_context(self.template, compiled, **kwargs)
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1942, in _render_with_context
+    return template.render(**kwargs)
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/usr/local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "<template>", line 1, in top-level template code
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1713, in forgiving_float_filter
+    raise_no_default("float", value)
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1411, in raise_no_default
+    raise ValueError(
+ValueError: Template error: float got invalid input 'unknown' when rendering template '{{ 100 - states('sensor.mattias_imac_storage') | float }}' but no default was specified
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 540, in async_render_to_info
+    render_info._result = self.async_render(variables, strict=strict, **kwargs)
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 425, in async_render
+    raise TemplateError(err) from err
+homeassistant.exceptions.TemplateError: ValueError: Template error: float got invalid input 'unknown' when rendering template '{{ 100 - states('sensor.mattias_imac_storage') | float }}' but no default was specified
+2022-12-20 14:34:46.577 ERROR (MainThread) [homeassistant.helpers.template_entity] TemplateError('ValueError: Template error: float got invalid input 'unknown' when rendering template '{{ 100 - states('sensor.mattias_imac_storage') | float }}' but no default was specified') while processing template 'Template("{{ 100 - states('sensor.mattias_imac_storage') | float }}")' for attribute '_attr_native_value' in entity 'sensor.template_imac_macintosh_hd'
+2022-12-20 14:34:46.722 WARNING (MainThread) [homeassistant.components.homeassistant.triggers.numeric_state] Error initializing 'ios_notify_tablet_unplugged' trigger: In 'numeric_state' condition: unknown entity sensor.galaxy_tab_a_battery_level
+2022-12-20 14:36:35.937 ERROR (SyncWorker_1) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:38:35.938 ERROR (SyncWorker_11) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:39:35.936 ERROR (SyncWorker_8) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:39:35.989 ERROR (SyncWorker_10) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:39:36.039 ERROR (SyncWorker_6) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:39:36.091 ERROR (SyncWorker_0) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:40:35.939 ERROR (SyncWorker_5) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:42:35.938 ERROR (SyncWorker_8) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:44:35.942 ERROR (SyncWorker_2) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:44:35.984 ERROR (SyncWorker_4) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:44:36.005 ERROR (SyncWorker_10) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:44:36.052 ERROR (SyncWorker_13) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:44:36.105 ERROR (SyncWorker_9) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:46:35.961 ERROR (SyncWorker_1) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:48:35.964 ERROR (SyncWorker_9) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:49:35.941 ERROR (SyncWorker_11) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:49:35.994 ERROR (SyncWorker_2) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:49:36.045 ERROR (SyncWorker_4) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:49:36.098 ERROR (SyncWorker_6) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:50:35.965 ERROR (SyncWorker_10) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:52:35.964 ERROR (SyncWorker_2) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:53:57.345 ERROR (MainThread) [homeassistant.components.shelly] Error fetching shelly1-483FDA82B5C3 data: Error fetching data: DeviceConnectionError()
+2022-12-20 14:54:35.954 ERROR (SyncWorker_6) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:54:36.020 ERROR (SyncWorker_13) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:54:36.037 ERROR (SyncWorker_9) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:54:36.097 ERROR (SyncWorker_0) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:54:36.156 ERROR (SyncWorker_0) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:56:35.976 ERROR (SyncWorker_11) [homeassistant.components.command_line] Command failed (with return code 127): abc
+2022-12-20 14:57:18.285 ERROR (MainThread) [homeassistant.components.hassio.handler] Client error on /core/update request Server disconnected

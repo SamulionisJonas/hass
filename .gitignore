@@ -1,0 +1,7 @@
+secrets.yaml
+.ssh
+.storage
+.cloud
+.google.token
+home-assistant.log
+id_rsa*

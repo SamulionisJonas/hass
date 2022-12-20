@@ -1,0 +1,126 @@
+homeassistant:
+  name: Namai
+  country: LT
+  packages: !include_dir_named include
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+lovelace:
+  mode: yaml #use ui-lovelace.yaml
+  resources: #hacs
+    - url: /hacsfiles/button-card/button-card.js
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+      type: module
+    - url: /hacsfiles/swipe-card/swipe-card.js
+      type: module
+    - url: /local/vanilla-tilt.min.js?v=1.7.2
+      type: module
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.websocket_api: fatal
+    homeassistant.components.camera: fatal
+    homeassistant.helpers.entity: fatal
+    custom_components.monitor_docker.helpers: fatal
+    
+person:
+  - name: Jonas
+    id: jonas
+    device_trackers:
+      - device_tracker.jonas_iphone
+
+waste_collection_schedule:
+  sources:
+    - name: ics
+      args:
+        url: "https://calendar.google.com/calendar/ical/9q0rl9qhk652miktp665pc8l5k%40group.calendar.google.com/public/basic.ics"
+      customize:
+       - type: A1
+         alias: Buitinės atliekos
+       - type: B1
+         alias: Popieriaus, plastiko, metalo pakuotės atliekos
+       - type: C1
+         alias: Stiklo pakuotės atliekos
+      calendar_title: WASTE COLLECTION
+
+
+browser_mod:
+  prefix: browser_
+ 
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Cover for Homekit - Garage
+cover:
+  - platform: template
+    covers:
+      garage_door:
+        device_class: garage
+        friendly_name: "Garage Door"
+        value_template: >-
+          {% if is_state('binary_sensor.shelly_garage_door_external_input','on') %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+        open_cover:
+          service: >- 
+             {% if is_state('binary_sensor.shelly_garage_door_external_input','on') %}switch.turn_off{%else%}switch.turn_on{%endif%}
+          data:
+            entity_id: switch.home_garage
+        close_cover:
+          service: >-
+            {% if is_state('binary_sensor.shelly_garage_door_external_input','on') %}switch.turn_on{%else%}switch.turn_off{%endif%}
+          data:
+            entity_id: switch.home_garage
+        stop_cover:
+          service: switch.turn_on
+          data:
+            entity_id: switch.home_garage
+        icon_template: >-
+          {% if is_state('binary_sensor.shelly_garage_door_external_input','on') %}
+            mdi:garage-open
+          {% else %}
+            mdi:garage
+          {% endif %}
+      outdoor_gates:
+        device_class: garage
+        friendly_name: "Outdoor gates"
+        value_template: >-
+          {% if is_state('binary_sensor.shellyplus1_7c87ce63c130_input','on') %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+        open_cover:
+          service: >- 
+             {% if is_state('binary_sensor.shellyplus1_7c87ce63c130_input','on') %}switch.turn_off{%else%}switch.turn_on{%endif%}
+          data:
+            entity_id: switch.outdoor_gates
+        close_cover:
+          service: >-
+            {% if is_state('binary_sensor.shellyplus1_7c87ce63c130_input','on') %}switch.turn_on{%else%}switch.turn_off{%endif%}
+          data:
+            entity_id: switch.outdoor_gates
+        stop_cover:
+          service: switch.turn_on
+          data:
+            entity_id: switch.outdoor_gates
+        icon_template: >-
+          {% if is_state('binary_sensor.shellyplus1_7c87ce63c130_input','on') %}
+            mdi:garage-open
+          {% else %}
+            mdi:garage
+          {% endif %}
+
+ 
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
