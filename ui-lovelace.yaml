@@ -427,7 +427,7 @@ views:
                   entity: light.garderob_lampa
                   name: Garažas
                   template:
-                      - garage
+                      - garage_door
 
                 - type: custom:button-card
                   entity: light.hall_group
