@@ -426,10 +426,9 @@ views:
                 - type: custom:button-card
                   entity: light.forest_side
                   name: 'Garažas'
-                  double_tap_action: !include popup/sovrum_tv2.yaml
                   template:
                       - base
-                      - mdi:garage
+                      - icon_spot
                       - loader
 
                 - type: custom:button-card
