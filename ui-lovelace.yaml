@@ -122,7 +122,7 @@ views:
 
                 - type: custom:button-card
                   entity: media_player.samsung_tv
-                  name: Tv
+                  name: TV
                   state_display: >
                       [[[
                         if (variables.state === 'on') {
@@ -424,10 +424,13 @@ views:
                       - icon_spot
 
                 - type: custom:button-card
-                  entity: light.garderob_lampa
-                  name: Garažas
+                  entity: light.forest_side
+                  name: 'Garažas'
+                  double_tap_action: !include popup/sovrum_tv2.yaml
                   template:
-                      - garage_door
+                      - base
+                      - mdi:garage
+                      - loader
 
                 - type: custom:button-card
                   entity: light.hall_group
