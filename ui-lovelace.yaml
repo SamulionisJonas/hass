@@ -428,7 +428,7 @@ views:
                   name: 'Garažas'
                   template:
                       - base
-                      - icon_spot
+                      - icon_garage
                       - loader
 
                 - type: custom:button-card
