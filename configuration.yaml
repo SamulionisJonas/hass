@@ -3,21 +3,29 @@ homeassistant:
   country: LT
   packages: !include_dir_named include
 
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
+
 # Loads default set of integrations. Do not remove.
 default_config:
+
+frontend: !include themes.yaml
+template: !include sidebar.yaml
 
 lovelace:
   mode: yaml #use ui-lovelace.yaml
   resources: #hacs
     - url: /hacsfiles/button-card/button-card.js
       type: module
-    - url: /hacsfiles/lovelace-card-mod/card-mod.js
-      type: module
     - url: /hacsfiles/lovelace-layout-card/layout-card.js
       type: module
     - url: /hacsfiles/swipe-card/swipe-card.js
       type: module
-    - url: /local/vanilla-tilt.min.js?v=1.7.2
+    - url: /hacsfiles/tabbed-card/tabbed-card.js
+      type: module
+    - url: /hacsfiles/apexcharts-card/apexcharts-card.js
       type: module
 
 logger:
@@ -27,12 +35,27 @@ logger:
     homeassistant.components.camera: fatal
     homeassistant.helpers.entity: fatal
     custom_components.monitor_docker.helpers: fatal
+
+hydrawise:
+  access_token: 16C8-5D4C-C0D9-EE33
     
 person:
   - name: Jonas
     id: jonas
     device_trackers:
       - device_tracker.jonas_iphone
+
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
 
 waste_collection_schedule:
   sources:
@@ -47,10 +70,6 @@ waste_collection_schedule:
        - type: C1
          alias: Stiklo pakuotės atliekos
       calendar_title: WASTE COLLECTION
-
-
-browser_mod:
-  prefix: browser_
  
 # Text to speech
 tts:
@@ -121,6 +140,5 @@ cover:
 
  
 
-automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml

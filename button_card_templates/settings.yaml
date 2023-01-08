@@ -1,0 +1,12 @@
+settings:
+  variables:
+    entity_tablet: switch.galaxy_tab_a_screensaver
+    entity_browser_mod: media_player.tablet
+    translate_unknown: Nežinomas
+    translate_idle: Neaktyvus
+    translate_home: Taip
+    translate_not_home: Ne
+    translate_available: prieinama
+    translate_no_updates: atnaujinimų nėra
+    translate_update_available: galimas atnaujinimas
+    translate_updates_available: galimi atnaujinimai

@@ -1,0 +1,120 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Historik
+    size: fullscreen
+    card_mod:
+      style:
+        #popup header
+        .:
+    content:
+      type: grid
+      columns: 2
+      square: false
+      cards:
+
+        - type: custom:apexcharts-card
+          graph_span: 12months
+          header:
+            title: WAN Bandwidth
+          series:
+            - sensor:
+              - name: "house_energy_kWh"
+                unit_of_measurement: "kWh"
+                state_class: measurement
+                device_class: energy
+                state: >
+                  {{ [ states('sensor.shelly_em3_channel_a_energy'), 
+                       states('sensor.shelly_em3_channel_b_energy'),
+                       states('sensor.shelly_em3_channel_c_energy') ]
+                     | map('float') | sum }}
+                attributes:         
+                  last_reset: '1970-01-01T00:00:00+00:00'
+                availability: >
+                  {{ not 'unavailable' in 
+                     [ states('sensor.sensor.shelly_em3_channel_a_energy'), 
+                       states('sensor.sensor.shelly_em3_channel_b_energy'),
+                       states('sensor.sensor.shelly_em3_channel_c_energy') ] }} 
+        #kwh
+        - type: custom:apexcharts-card
+          graph_span: 12months
+          apex_config:
+            tooltip:
+              style:
+                fontSize: 14px
+              x:
+                show: true
+                formatter: |
+                  EVAL:(timestamp) => {
+                    let date = new Date(timestamp).toLocaleString('sv-SE',{year: 'numeric', month:'long'}).toString()
+                    return date.charAt(0).toUpperCase() + date.slice(1);
+                  }
+            chart:
+              height: 400px
+              fontFamily: SF Pro Text
+            fill:
+              type: gradient
+              gradient:
+                type: vertical
+                shadeIntensity: 0.2
+                opacityFrom: 1
+                opacityTo: 0.7
+                stops:
+                  - 0
+                  - 70
+                  - 100
+            grid:
+              show: true
+              borderColor: rgba(112, 135, 164, 0.1)
+            yaxis:
+              show: true
+              decimalsInFloat: 0
+              labels:
+                style:
+                  colors:
+                    - rgba(255, 255, 255, 0.5)
+                  fontSize: 13px
+                  fontWeight: 200
+                offsetX: -2
+            title:
+              text: ⚡ kWh
+              style:
+                color: white
+                fontSize: 38px
+                fontWeight: 700
+            xaxis:
+              tooltip:
+                enabled: false
+              crosshairs:
+                show: false
+              axisTicks:
+                show: false
+              axisBorder:
+                show: true
+                color: rgba(112, 135, 164, 0.5)
+                height: 1
+          series:
+            - entity: sensor.date
+              name: Förbrukning
+              unit: kWh
+              type: column
+              color: rgba(228,224,17,1)
+              data_generator: 
+                - sensor:
+                  - name: "house_energy_kWh"
+                    unit_of_measurement: "kWh"
+                    state_class: measurement
+                    device_class: energy
+                    state: >
+                      {{ [ states('sensor.shelly_em3_channel_a_energy'), 
+                           states('sensor.shelly_em3_channel_b_energy'),
+                           states('sensor.shelly_em3_channel_c_energy') ]
+                         | map('float') | sum }}
+                    attributes:         
+                      last_reset: '1970-01-01T00:00:00+00:00'
+                    availability: >
+                      {{ not 'unavailable' in 
+                         [ states('sensor.sensor.shelly_em3_channel_a_energy'), 
+                           states('sensor.sensor.shelly_em3_channel_b_energy'),
+                           states('sensor.sensor.shelly_em3_channel_c_energy') ] }} 
