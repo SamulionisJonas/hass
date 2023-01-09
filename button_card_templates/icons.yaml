@@ -613,7 +613,7 @@ icon_garage:
     custom_fields:
         icon: >
             [[[
-              let state = variables.state_on ? 'on' : null;
+              let state = variables.state_on ? 'on' : 'off';
               return `
                 <svg viewBox="0 0 50 50">
                   <style>
