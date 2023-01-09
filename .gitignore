@@ -11,3 +11,5 @@ zigbee.db-shm
 zigbee.db-wal
 id_rsa*
 custom_components*
+zigbee.db
+home-assistant*
