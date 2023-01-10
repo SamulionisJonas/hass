@@ -432,11 +432,12 @@ views:
                       - loader
 
                 - type: custom:button-card
-                  entity: light.hall_group
-                  name: Koridorius
+                  entity: light.forest_side
+                  name: 'Vartai'
                   template:
-                      - light
-                      - icon_spot
+                      - base
+                      - icon_gates
+                      - loader
 
           #################################################
           #                                               #
