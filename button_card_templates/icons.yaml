@@ -659,7 +659,7 @@ icon_gates:
     custom_fields:
         icon: >
             [[[
-              let state = variables.state_on ? 'off' : 'on';
+              let state = variables.state_on ? 'on' : 'off';
               return `
                 <svg viewBox="0 0 50 50">
                   <style>
