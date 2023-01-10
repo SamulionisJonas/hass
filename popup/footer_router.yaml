@@ -25,13 +25,13 @@ browser_mod:
                       class: content
                   entities:
                       - entity: binary_sensor.b818_263_mobile_connection
-                        name: Wifi connection
+                        name: Wifi ryšys
 
                       - entity: binary_sensor.b818_263_mobile_connection
-                        name: Mobile connection
+                        name: Mobilūs duomenys
 
                       - entity: sensor.b818_263_wifi_clients_connected
-                        name: Wifi clients connected
+                        name: Prisijungusių klientų
 
                 - type: custom:mod-card
                   card_mod:
