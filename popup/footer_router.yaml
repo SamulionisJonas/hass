@@ -1,80 +1,61 @@
 update_entities:
-  action: >
-    [[[
-      hass.callService('homeassistant', 'update_entity', {
-          entity_id: [
-            'binary_sensor.b818_263_mobile_connection'
-          ]
-      });
-    ]]]
+    action: >
+        [[[
+          hass.callService('homeassistant', 'update_entity', {
+              entity_id: [
+                'binary_sensor.b818_263_mobile_connection'
+              ]
+          });
+        ]]]
 action: fire-dom-event
 browser_mod:
-  service: browser_mod.popup
-  data:
-    title: UniFi Dream Machine
-    card_mod:
-      style:
-        #popup header
-        .:
-    content:
-      type: vertical-stack
-      cards:
-        - type: entities
-          state_color: true
-          card_mod:
-            class: content
-          entities:
-
-            - entity: binary_sensor.b818_263_mobile_connection
-              secondary_info: last-changed
-
-            - entity: binary_sensor.b818_263_mobile_connection
-              name: CPU Temperatur
-
-            - type: custom:bar-card
-              width: 55%
-              height: 2em
-              decimal: 0
-              unit_of_measurement: '%'
-              positions:
-                icon: outside
-                indicator: 'off'
-                name: outside
-              severity:
-                - color: '#6d2525'
-                  from: 90
-                  to: 999
-              entity_row: true
-              entities:
-                - entity: sensor.template_udm_cpu
-                - entity: sensor.template_udm_mem
-                - entity: sensor.template_udm_disk
-
-            - entity: sensor.template_udm_uptime
-
-        - type: custom:mod-card
-          card_mod:
+    service: browser_mod.popup
+    data:
+        title: Huawei B818-263
+        card_mod:
             style:
-              hui-horizontal-stack-card$: |
-                #root {
-                  justify-content: space-evenly !important;
-                  padding: var(--tablet-popup-button-padding);
-                }
-          card:
-            type: horizontal-stack
+                #popup header
+                .:
+        content:
+            type: vertical-stack
             cards:
-              - type: custom:button-card
-                name: Nätverksenheter
-                icon: mdi:devices
-                tap_action:
-                  action: url
-                  url_path: https://192.168.1.1/network/default/clients
-                template: icon_name
+                - type: entities
+                  state_color: true
+                  card_mod:
+                      class: content
+                  entities:
+                      - entity: binary_sensor.b818_263_mobile_connection
+                        name: Wifi connection
 
-              - type: custom:button-card
-                name: System
-                icon: mdi:cog
-                tap_action:
-                  action: url
-                  url_path: https://192.168.1.1/settings/system
-                template: icon_name
+                      - entity: binary_sensor.b818_263_mobile_connection
+                        name: Mobile connection
+
+                      - entity: sensor.b818_263_wifi_clients_connected
+                        name: Wifi clients connected
+
+                - type: custom:mod-card
+                  card_mod:
+                      style:
+                          hui-horizontal-stack-card$: |
+                              #root {
+                                justify-content: space-evenly !important;
+                                padding: var(--tablet-popup-button-padding);
+                              }
+                  card:
+                      type: horizontal-stack
+                      cards:
+                          - type: custom:button-card
+                            name: Nustatymai
+                            icon: mdi:devices
+                            tap_action:
+                                action: url
+                                url_path: http://192.168.8.1/
+                            template: icon_name
+
+                          - type: custom:button-card
+                            name: Sistema
+                            icon: mdi:cog
+                            tap_action:
+                                action: url
+                                url_path: http://192.168.8.1/html/content.html#wifiadvanced
+                            template: icon_name
