@@ -3,7 +3,8 @@ homeassistant:
     country: LT
     packages: !include_dir_named include
     external_url: "https://home.jsam.dev"
-
+    allowlist_external_dirs:
+      - /config
 
 http:
     use_x_forwarded_for: true
@@ -44,12 +45,11 @@ lovelace:
     ]
 
 logger:
-    default: warning
-    logs:
-        homeassistant.components.websocket_api: fatal
-        homeassistant.components.camera: fatal
-        homeassistant.helpers.entity: fatal
-        custom_components.monitor_docker.helpers: fatal
+  default: warning
+  logs:
+    homeassistant.components.websocket_api: fatal
+    custom_components.monitor_docker.helpers: error
+    homeassistant.setup: error
 
 hydrawise:
     access_token: 16C8-5D4C-C0D9-EE33
