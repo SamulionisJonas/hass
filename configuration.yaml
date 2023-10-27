@@ -2,6 +2,8 @@ homeassistant:
     name: Namai
     country: LT
     packages: !include_dir_named include
+    external_url: "https://home.jsam.dev"
+
 
 http:
     use_x_forwarded_for: true
@@ -40,7 +42,7 @@ lovelace:
       { url: '/local/browser_mod_icon.js?v=0.5',                                    type: module },
       { url: '/local/fonts.css?v=2.1',                                              type: css }
     ]
-    
+
 logger:
     default: warning
     logs:
