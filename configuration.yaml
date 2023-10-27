@@ -11,23 +11,36 @@ http:
 # Loads default set of integrations. Do not remove.
 default_config:
 
-frontend: !include themes.yaml
+frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+  themes: !include_dir_merge_named themes
+
 template: !include sidebar.yaml
 
 lovelace:
-    mode: yaml #use ui-lovelace.yaml
-    resources: #hacs
-        - url: /hacsfiles/button-card/button-card.js
-          type: module
-        - url: /hacsfiles/lovelace-layout-card/layout-card.js
-          type: module
-        - url: /hacsfiles/swipe-card/swipe-card.js
-          type: module
-        - url: /hacsfiles/tabbed-card/tabbed-card.js
-          type: module
-        - url: /hacsfiles/apexcharts-card/apexcharts-card.js
-          type: module
+  mode: yaml
+  resources:
+    [
+      { url: /hacsfiles/apexcharts-card/apexcharts-card.js,                         type: module },
+      { url: /hacsfiles/bar-card/bar-card.js,                                       type: module },
+      { url: /hacsfiles/button-card/button-card.js,                                 type: module },
+      { url: /hacsfiles/custom-icons/custom-icons.js,                               type: module },
+      { url: /hacsfiles/kiosk-mode/kiosk-mode.js,                                   type: module },
+      { url: /hacsfiles/lovelace-layout-card/layout-card.js,                        type: module },
+      { url: /hacsfiles/lovelace-more-info-card/more-info-card.js,                  type: module },
+      { url: /hacsfiles/lovelace-mushroom/mushroom.js,                              type: module },
+      { url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js,            type: module },
+      { url: /hacsfiles/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js,  type: module },
+      { url: /hacsfiles/swipe-card/swipe-card.js,                                   type: module },
+      { url: /hacsfiles/tabbed-card/tabbed-card.js,                                 type: module },
 
+      { url: '/local/marked.min.js?v=4.3.0',                                        type: module },
+      { url: '/local/vanilla-tilt.min.js?v=1.8.0',                                  type: module },
+      { url: '/local/browser_mod_icon.js?v=0.5',                                    type: module },
+      { url: '/local/fonts.css?v=2.1',                                              type: css }
+    ]
+    
 logger:
     default: warning
     logs:

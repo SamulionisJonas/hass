@@ -10,3 +10,11 @@ settings:
     translate_no_updates: atnaujinimų nėra
     translate_update_available: galimas atnaujinimas
     translate_updates_available: galimi atnaujinimai
+
+    translate_on: På
+    translate_off: Av
+    translate_cool: Kyla
+    translate_fan_only: Endast fläkt
+    translate_playing: Spelar
+    translate_paused: Pausad
+    translate_standby: Viloläge
