@@ -2,7 +2,7 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    title: Dammsugare
+    title: Siurblys
     timeout: 300000
     style: |
       --popup-max-width: calc(385px + 495px);
@@ -59,8 +59,8 @@ browser_mod:
                 }
             entities:
 
-            - entity: vacuum.morty
-            - entity: sensor.morty_last_clean_end
+            - entity: vacuum.roborock_s7
+            - entity: sensor.roborock_s7_last_clean_end
 
             - type: custom:bar-card
               width: 55%
@@ -80,17 +80,17 @@ browser_mod:
                   to: 10
               entity_row: true
               entities:
-                - entity: vacuum.morty
+                - entity: vacuum.roborock_s7
                   attribute: battery_level
                   name: Batteri
                   icon: mdi:battery
-                - entity: sensor.template_vacuum_filter
-                - entity: sensor.template_vacuum_mainbrush
-                - entity: sensor.template_vacuum_sidebrush
-                - entity: sensor.template_vacuum_sensors
+                - entity: sensor.roborock_s7_filter_time_left
+                - entity: sensor.roborock_s7_main_brush_time_left
+                - entity: sensor.roborock_s7_side_brush_time_left
+                - entity: sensor.roborock_s7_sensor_time_left
 
             - type: custom:more-info-card
-              entity: vacuum.morty
+              entity: vacuum.roborock_s7
               card_mod:
                 style:
                   # hide everything but ha-select
@@ -139,7 +139,7 @@ browser_mod:
               type: horizontal-stack
               cards:
                 - type: custom:button-card
-                  entity: vacuum.morty
+                  entity: vacuum.roborock_s7
                   icon: mdi:play-pause
                   tap_action:
                     action: call-service
@@ -152,17 +152,17 @@ browser_mod:
                         ]]]`
                       ]]]
                     service_data:
-                      entity_id: vacuum.morty
+                      entity_id: vacuum.roborock_s7
                   template: icon_only
 
                 - type: custom:button-card
-                  entity: vacuum.morty
+                  entity: vacuum.roborock_s7
                   icon: mdi:battery-charging
                   tap_action:
                     action: call-service
                     service: vacuum.return_to_base
                     service_data:
-                      entity_id: vacuum.morty
+                      entity_id: vacuum.roborock_s7
                   template: icon_only
 
                 - type: custom:button-card
@@ -171,7 +171,7 @@ browser_mod:
                     action: call-service
                     service: vacuum.send_command
                     service_data:
-                      entity_id: vacuum.morty
+                      entity_id: vacuum.roborock_s7
                       command: app_goto_target
                       params: [16821,23105]
                   template: icon_only
@@ -215,7 +215,7 @@ browser_mod:
                 padding: 0.42em;
               }
           language: sv
-          entity: vacuum.morty
+          entity: vacuum.roborock_s7
           map_source:
             camera: camera.vacuum_map
           calibration_source:
