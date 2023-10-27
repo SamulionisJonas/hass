@@ -24,8 +24,8 @@ browser_mod:
             }
           }
     content:
-      type: custom:layout-card
-      layout_type: custom:grid-layout
+      type: 'custom:layout-card'
+      layout_type: 'custom:grid-layout'
       layout:
         margin: 0
         grid-template-columns: 385px 495px
@@ -126,7 +126,7 @@ browser_mod:
                             background: var(--card-background-color);
                           }
 
-          - type: custom:mod-card
+          - type: 'custom:mod-card'
             card_mod:
               style:
                 # horizontal bottom buttons
@@ -138,7 +138,7 @@ browser_mod:
             card:
               type: horizontal-stack
               cards:
-                - type: custom:button-card
+                - type: 'custom:button-card'
                   entity: vacuum.roborock_s7
                   icon: mdi:play-pause
                   tap_action:
@@ -155,7 +155,7 @@ browser_mod:
                       entity_id: vacuum.roborock_s7
                   template: icon_only
 
-                - type: custom:button-card
+                - type: 'custom:button-card'
                   entity: vacuum.roborock_s7
                   icon: mdi:battery-charging
                   tap_action:
@@ -178,7 +178,7 @@ browser_mod:
 
         ### KARTLÄGGNING
 
-        - type: custom:xiaomi-vacuum-map-card
+        - type: 'custom:xiaomi-vacuum-map-card'
           title: Kartläggning
           view_layout:
             grid-area: map
