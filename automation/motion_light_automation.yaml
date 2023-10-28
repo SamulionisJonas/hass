@@ -1,0 +1,23 @@
+automation:
+    - alias: 'Motion Detected at Night - Turn On Light'
+      trigger:
+          - platform: state
+            entity_id: camera.terrace_back_person # Replace with your motion sensor entity
+            to: 'person' # Assuming 'person' state when motion is detected
+      condition:
+          - condition: state
+            entity_id: sun.sun
+            state: 'below_horizon' # Trigger the automation when the sun is below the horizon (nighttime)
+      action:
+          - service: script.turn_on_light
+
+    - alias: 'Turn off light after X minutes'
+      trigger:
+          - platform: state
+            entity_id: light.terrasse # Replace with your light entity
+            to: 'on'
+            for:
+                minutes: 5 # Adjust as needed (X minutes)
+      action:
+          - service: light.turn_off
+            entity_id: light.terrasse # Replace with your light entity
