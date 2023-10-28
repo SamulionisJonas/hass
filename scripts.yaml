@@ -1,4 +1,0 @@
-alias: 'Turn on light'
-sequence:
-    - service: light.turn_on
-      entity_id: light.terrasse # Replace with your light entity
