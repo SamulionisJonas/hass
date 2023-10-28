@@ -1,0 +1,25 @@
+- alias: 'Motion Detected at Night - Turn On Light'
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.terrace_back_person_occupancy
+        to: 'detected'
+      - platform: state
+        entity_id: binary_sensor.terrace_side_person_occupancy
+        to: 'detected'
+  condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+  action:
+      - service: script.turn_on_light
+
+- alias: 'Turn off light after X minutes'
+  trigger:
+      - platform: state
+        entity_id: light.terrasse
+        to: 'on'
+        for:
+            minutes: 5 # Adjust as needed (X minutes)
+  action:
+      - service: light.turn_off
+        entity_id: light.terrasse
