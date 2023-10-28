@@ -2,8 +2,11 @@ automation:
     - alias: 'Motion Detected at Night - Turn On Light'
       trigger:
           - platform: state
-            entity_id: camera.terrace_back_person # Replace with your motion sensor entity
-            to: 'person' # Assuming 'person' state when motion is detected
+            entity_id: binary_sensor.terrace_back_person_occupancy
+            to: 'detected'
+          - platform: state
+            entity_id: binary_sensor.terrace_side_person_occupancy
+            to: 'detected'
       condition:
           - condition: state
             entity_id: sun.sun
