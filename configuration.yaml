@@ -60,9 +60,6 @@ logger:
         custom_components.monitor_docker.helpers: error
         homeassistant.setup: error
 
-hydrawise:
-    access_token: 16C8-5D4C-C0D9-EE33
-
 person:
     - name: Jonas
       id: jonas

@@ -1,0 +1,9 @@
+turn_off_terrace_light:
+  alias: Turn off terrace light
+  sequence:
+  - type: turn_off
+    device_id: d21801f4e07efd0093840dc74fc5a2e4
+    entity_id: 6021cf2b098550e7af065f962ccf86a1
+    domain: light
+  mode: single
+  icon: mdi:lightbulb-cfl-off

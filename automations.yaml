@@ -1,0 +1,62 @@
+- id: '1698481565022'
+  alias: Motion terrace lights on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.terrace_back_all_occupancy
+    - binary_sensor.terrace_side_all_occupancy
+    to: 'on'
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
+  action:
+  - type: turn_on
+    device_id: 8b10ee579284be670cf7b94bbd34206b
+    entity_id: 0a5d50b268f438eb3acefc0dedc5a5cf
+    domain: switch
+  - wait_for_trigger:
+    - type: not_occupied
+      platform: device
+      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
+      entity_id: 3a62ef923b6ae64d51983d95a969cf57
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    timeout:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 8b10ee579284be670cf7b94bbd34206b
+    entity_id: 0a5d50b268f438eb3acefc0dedc5a5cf
+    domain: switch
+  mode: single
+- id: '1698693759878'
+  alias: Soninis apsvietimas
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition:
+  - condition: sun
+    before: sunrise
+  action:
+  - type: turn_on
+    device_id: 518ca2a7f6303b6656a20cb2b725bb8a
+    entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
+    domain: switch
+  - wait_for_trigger:
+    - platform: sun
+      event: sunrise
+      offset: 0
+  - type: turn_off
+    device_id: 518ca2a7f6303b6656a20cb2b725bb8a
+    entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
+    domain: switch
+  mode: single
