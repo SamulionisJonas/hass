@@ -30,7 +30,7 @@ browser_mod:
               show:
                 legend_value: false
                 in_header: false
-              extend_to_end: false
+              extend_to: false
             - entity: sensor.nordpool_kwh_lt_eur_3_095_021
               name: Rytoj
               data_generator: |
