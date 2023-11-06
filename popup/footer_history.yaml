@@ -11,33 +11,36 @@ browser_mod:
       cards:
 
         #kwh
-        - type: custom:apexcharts-card
+        - type: custom:apexcharts-card      
+          graph_span: 24h
           header:
+            title: Energy price today (snt/kWh)
             show: true
-            title: Nordpool kainos -> 48 hours
-            show_states: false
-          graph_span: 2d
           span:
             start: day
+          now:
+            show: true
+            label: Now
           series:
-            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
-              name: Šiandiena
-              data_generator: |
-                return entity.attributes.raw_today.map((entry) => {
-                  return [new Date(entry.start), entry.value];
-                });
+            - entity: sensor.nordpool_kwh_fi_eur_3_10_024
               type: column
-              show:
-                legend_value: false
-                in_header: false
-              extend_to: false
-            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
-              name: Rytoj
               data_generator: |
-                return entity.attributes.raw_tomorrow.map((entry) => {
-                  return [new Date(entry.start), entry.value];
+                return entity.attributes.raw_today.map((start, index) => {
+                  return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
                 });
+
+        - type: custom:apexcharts-card
+          graph_span: 1d
+          header:
+            title: Energy price tomorrow (snt/kWh)
+            show: true
+          span:
+            start: day
+            offset: +1d
+          series:
+            - entity: sensor.nordpool_kwh_fi_eur_3_10_024
               type: column
-              show:
-                legend_value: false
-                in_header: false
+              data_generator: |
+                return entity.attributes.raw_tomorrow.map((start, index) => {
+                  return [new Date(start["start"]).getTime(), entity.attributes.raw_tomorrow[index]["value"]];
+                });
