@@ -38,7 +38,7 @@ browser_mod:
           show_state: false
           entities:
 
-            - entity: sensor.jonas_iphone_connection_type
+            - entity: sensor.iphone_connection_type
               name: Router
               icon: mdi:wifi
               card_mod:
@@ -53,7 +53,7 @@ browser_mod:
               card_mod:
                 style: *state
 
-            - entity: sensor.jonas_iphone_geocoded_location
+            - entity: sensor.iphone_geocoded_location
               name: Position
               icon: cil:iphone-modern
               card_mod:

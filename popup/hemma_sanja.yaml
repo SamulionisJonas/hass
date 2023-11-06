@@ -2,7 +2,7 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    title: Sanja
+    title: Paulina
     card_mod:
       style:
         #popup header
@@ -16,7 +16,7 @@ browser_mod:
           card_mod:
             class: content
           entities:
-            - entity: person.sanja
+            - entity: person.paulina
               secondary_info: last-changed
 
         - type: history-graph
@@ -26,7 +26,7 @@ browser_mod:
                 padding: 0 2em 1em 1.6em !important;
               }
           entities:
-            - entity: person.sanja
+            - entity: person.paulina
 
         - type: glance
           card_mod:
@@ -37,7 +37,7 @@ browser_mod:
           show_state: false
           entities:
 
-            - entity: device_tracker.sanjas_iphone_unifi
+            - entity: device_tracker.paulinas_iphone_unifi
               name: Router
               icon: mdi:wifi
               card_mod:
@@ -46,13 +46,13 @@ browser_mod:
                     color: {{ '#3182b7' if is_state(config.entity, 'home') else '#3c3f3f' }};
                   }
 
-            - entity: device_tracker.sanja_iphone_13
+            - entity: device_tracker.paulina_iphone_13
               name: Bluetooth
               icon: mdi:bluetooth
               card_mod:
                 style: *state
 
-            - entity: device_tracker.sanja_iphone_13
+            - entity: device_tracker.paulina_iphone_13
               name: Position
               icon: cil:iphone-modern
               card_mod:
@@ -75,7 +75,7 @@ browser_mod:
                 template: icon_name
                 tap_action:
                   action: call-service
-                  service: notify.mobile_app_sanja_iphone_13
+                  service: notify.mobile_app_paulina_iphone_13
                   service_data:
                     title: Hitta min iPhone
                     message: Här är jag
