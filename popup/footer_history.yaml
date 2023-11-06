@@ -2,7 +2,7 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    title: Elektra
+    title: Suvartojimas
     size: fullscreen
     content:
       type: grid
