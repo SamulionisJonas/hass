@@ -40,21 +40,17 @@
   alias: Soninis apsvietimas
   description: ''
   trigger:
-  - platform: sun
-    event: sunset
-    offset: 0
-  condition:
-  - condition: sun
-    before: sunrise
+  - platform: time
+    at: '23:00:00'
+  condition: []
   action:
   - type: turn_on
     device_id: 518ca2a7f6303b6656a20cb2b725bb8a
     entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
     domain: switch
   - wait_for_trigger:
-    - platform: sun
-      event: sunrise
-      offset: 0
+    - platform: time
+      at: 05:00:00
   - type: turn_off
     device_id: 518ca2a7f6303b6656a20cb2b725bb8a
     entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
