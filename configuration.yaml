@@ -59,6 +59,10 @@ logger:
         homeassistant.components.websocket_api: fatal
         custom_components.monitor_docker.helpers: error
         homeassistant.setup: error
+        nordpool: debug
+        custom_components.nordpool: debug
+        custom_components.nordpool.sensor: debug
+        custom_components.nordpool.aio_price: debug
 
 sensor:
     - platform: nordpool
@@ -82,14 +86,7 @@ sensor:
         {% else %}
             {{ (s.day_rate + s.hourly_fixed_cost + s.cert) | float }}
         {% endif %}
-
-person:
-    - name: Jonas
-      id: jonas
-      device_trackers:
-          - device_tracker.jonas_iphone
-
-sensor:
+        
     - platform: time_date
       display_options:
           - 'time'
@@ -100,6 +97,13 @@ sensor:
           - 'time_date'
           - 'time_utc'
           - 'beat'
+
+person:
+    - name: Jonas
+      id: jonas
+      device_trackers:
+          - device_tracker.jonas_iphone
+
 
 waste_collection_schedule:
     sources:
