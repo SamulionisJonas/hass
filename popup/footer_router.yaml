@@ -11,7 +11,7 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    title: UniFi Dream Machine
+    title: Deco X50 5G
     content:
       type: vertical-stack
       cards:

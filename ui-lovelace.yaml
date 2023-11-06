@@ -575,15 +575,9 @@ views:
 
           - type: custom:button-card
             name: >
-              <ha-icon icon="mdi:tablet"></ha-icon> Platta
+              <ha-icon icon="mdi:home-climate-outline"></ha-icon> Klimatas
             tap_action:
-              !include popup/footer_tablet.yaml
-            variables:
-              notify: >
-                [[[
-                  let id = states['binary_sensor.galaxy_tab_a_plugged_in'];
-                  if (id) return id.state === 'off';
-                ]]]
+              !include popup/footer_climate.yaml
             template: footer
 
           - type: custom:button-card
