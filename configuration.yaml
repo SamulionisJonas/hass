@@ -75,16 +75,17 @@ sensor:
       price_type: kWh
       additional_costs: |
         {% set s = {
-            "hourly_fixed_cost": 0.5352,
             "day_night_switch_hour": 23,
             "night_rate": 0.04719,
             "day_rate": 0.07865,
-            "cert": 0.01850
-        } %}
-        {% if now().hour >= s.day_night_switch_hour %}
-            {{ (s.night_rate + s.hourly_fixed_cost + s.cert) | float }}
+            "cert": 0.01
+        }
+        %}
+
+        {% if now().hour >= s.day_night_switch_hour or now().weekday() in [5, 6] %}
+            {{ s.night_rate + s.cert | float }}
         {% else %}
-            {{ (s.day_rate + s.hourly_fixed_cost + s.cert) | float }}
+            {{ s.day_rate + s.cert | float }}
         {% endif %}
         
     - platform: time_date
