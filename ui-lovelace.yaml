@@ -458,21 +458,21 @@ views:
       #################################################
 
       - type: grid
-        title: Hemma
+        title: Namai
         view_layout:
           grid-area: hemma
         columns: 2
         cards:
 
           - type: custom:button-card
-            entity: person.matte
-            name: Mattias
+            entity: person.jonas
+            name: Jonas
             triggers_update:
-              - sensor.matte_last_changed
+              - sensor.iphone_last_changed
             double_tap_action:
-              !include popup/hemma_mattias.yaml
+              !include popup/home_jonas.yaml
             variables:
-              retain: sensor.matte_last_changed
+              retain: sensor.iphone_last_changed
             template:
               - person
               - circle
