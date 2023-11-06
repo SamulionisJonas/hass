@@ -1,46 +1,45 @@
 action: fire-dom-event
 browser_mod:
-  service: browser_mod.popup
-  data:
-    title: Suvartojimas
-    size: fullscreen
-    content:
-      type: grid
-      columns: 2
-      square: false
-      cards:
+    service: browser_mod.popup
+    data:
+        title: Suvartojimas
+        size: fullscreen
+        content:
+            type: grid
+            columns: 2
+            square: false
+            cards:
+                #kwh
+                - type: custom:apexcharts-card
+                  graph_span: 24h
+                  header:
+                      title: Šiandienos kainos - {{sensor.nordpool_kwh_lt_eur_3_095_021}} EUR
+                      show: true
+                  span:
+                      start: day
+                  now:
+                      show: true
+                      label: Dabar
+                  series:
+                      - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+                        type: column
+                        data_generator: |
+                            return entity.attributes.raw_today.map((start, index) => {
+                              return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
+                            });
 
-        #kwh
-        - type: custom:apexcharts-card      
-          graph_span: 24h
-          header:
-            title: Šiandienos kainos - [[sensor.nordpool_kwh_lt_eur_3_095_021]] EUR
-            show: true
-          span:
-            start: day
-          now:
-            show: true
-            label: Dabar
-          series:
-            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
-              type: column
-              data_generator: |
-                return entity.attributes.raw_today.map((start, index) => {
-                  return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
-                });
-
-        - type: custom:apexcharts-card
-          graph_span: 1d
-          header:
-            title: Rytojaus kainos
-            show: true
-          span:
-            start: day
-            offset: +1d
-          series:
-            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
-              type: column
-              data_generator: |
-                return entity.attributes.raw_tomorrow.map((start, index) => {
-                  return [new Date(start["start"]).getTime(), entity.attributes.raw_tomorrow[index]["value"]];
-                });
+                - type: custom:apexcharts-card
+                  graph_span: 1d
+                  header:
+                      title: Rytojaus kainos
+                      show: true
+                  span:
+                      start: day
+                      offset: +1d
+                  series:
+                      - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+                        type: column
+                        data_generator: |
+                            return entity.attributes.raw_tomorrow.map((start, index) => {
+                              return [new Date(start["start"]).getTime(), entity.attributes.raw_tomorrow[index]["value"]];
+                            });
