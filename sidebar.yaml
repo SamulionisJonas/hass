@@ -128,6 +128,7 @@
                 {% set entities = states.sensor
                   | selectattr('entity_id', 'search', 'battery')
                   | rejectattr('entity_id', 'search', 'iphone')
+                  | rejectattr('entity_id', 'search', 'ipad')  # Add this line to exclude iPad
                   | map(attribute = 'entity_id') | list %}
                 {% for sensor in entities if states(sensor) != 'unknown' and states(sensor) !=
                   'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}
