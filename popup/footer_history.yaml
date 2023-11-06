@@ -11,8 +11,33 @@ browser_mod:
       cards:
 
         #kwh
-        - type: custom:apexcharts-card
-          graph: line
-          hours_to_show: 24
-          entities:
-            - sensor.nordpool_kwh_lt_eur_3_095_021
+        - type: 'custom:apexcharts-card'
+            header:
+              show: true
+              title: Nordpool kainos -> 48 hours
+              show_states: false
+            graph_span: 2d
+            span:
+              start: day
+            series:
+              - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+                name: Šiandiena
+                data_generator: |
+                  return entity.attributes.raw_today.map((entry) => {
+                    return [new Date(entry.start), entry.value];
+                  });
+                type: column
+                show:
+                  legend_value: false
+                  in_header: false
+                extend_to_end: false
+              - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+                name: Rytoj
+                data_generator: |
+                  return entity.attributes.raw_tomorrow.map((entry) => {
+                    return [new Date(entry.start), entry.value];
+                  });
+                type: column
+                show:
+                  legend_value: false
+                  in_header: false
