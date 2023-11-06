@@ -22,7 +22,7 @@ browser_mod:
             show: true
             label: Now
           series:
-            - entity: sensor.nordpool_kwh_fi_eur_3_10_024
+            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
               type: column
               data_generator: |
                 return entity.attributes.raw_today.map((start, index) => {
@@ -38,7 +38,7 @@ browser_mod:
             start: day
             offset: +1d
           series:
-            - entity: sensor.nordpool_kwh_fi_eur_3_10_024
+            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
               type: column
               data_generator: |
                 return entity.attributes.raw_tomorrow.map((start, index) => {
