@@ -60,6 +60,29 @@ logger:
         custom_components.monitor_docker.helpers: error
         homeassistant.setup: error
 
+sensor:
+  - platform: nordpool
+    region: "LT"
+    currency: "EUR"
+    VAT: True
+    precision: 3
+    low_price_cutoff: 0.95
+    price_in_cents: false
+    price_type: kWh
+    additional_costs: |
+      {% set s = {
+          "hourly_fixed_cost": 0.5352,
+          "day_night_switch_hour": 23,
+          "night_rate": 0.04719,
+          "day_rate": 0.07865,
+          "cert": 0.01850
+      } %}
+      {% if now().hour >= s.day_night_switch_hour %}
+          {{ (s.night_rate + s.hourly_fixed_cost + s.cert) | float }}
+      {% else %}
+          {{ (s.day_rate + s.hourly_fixed_cost + s.cert) | float }}
+      {% endif %}
+
 person:
     - name: Jonas
       id: jonas
