@@ -582,7 +582,7 @@ views:
 
           - type: custom:button-card
             name: >
-              <ha-icon icon="mdi:router-wireless"></ha-icon> Router
+              <ha-icon icon="mdi:router-wireless"></ha-icon> Internetas
             tap_action:
               !include popup/footer_router.yaml
             triggers_update:
