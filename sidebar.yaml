@@ -114,23 +114,23 @@
             movement: >
                 <b>
                 {% set motion_sensors = [
-                  'binary_sensor.darbo_kambarys_2a_motion',
-                  'binary_sensor.koridorius_2a_motion',
-                  'binary_sensor.miegamasis_2a_motion',
-                  'binary_sensor.garazas_motion',
-                  'binary_sensor.katiline_pir_motion',
-                  'binary_sensor.koridorius_motion',
-                  'binary_sensor.vonia_motion',
-                  'binary_sensor.svetaine_motion',
-                  'binary_sensor.kambarys_motion',
+                  binary_sensor.darbo_kambarys_2a_motion,
+                  binary_sensor.koridorius_2a_motion,
+                  binary_sensor.miegamasis_2a_motion,
+                  binary_sensor.garazas_motion,
+                  binary_sensor.katiline_pir_motion,
+                  binary_sensor.koridorius_motion,
+                  binary_sensor.vonia_motion,
+                  binary_sensor.svetaine_motion,
+                  binary_sensor.kambarys_motion,
                 ] %}
 
                 {% set door_sensors = [
-                  'binary_sensor.garazo_durys_contact',
-                  'binary_sensor.garazo_vartai_contact',
-                  'binary_sensor.katlines_durys_contact',
-                  'binary_sensor.pagrindinis_iejimas_contact',
-                  'binary_sensor.shellyplus1_7c87ce63c130_input_0_input',
+                  binary_sensor.garazo_durys_contact,
+                  binary_sensor.garazo_vartai_contact,
+                  binary_sensor.katlines_durys_contact,
+                  binary_sensor.pagrindinis_iejimas_contact,
+                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
                 ] %}
 
                 {% set active_motion_sensors = states | selectattr('entity_id', 'in', motion_sensors) | selectattr('state', 'eq', 'on') | list %}
