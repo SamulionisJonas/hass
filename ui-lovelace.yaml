@@ -416,7 +416,7 @@ views:
         title: Kita
         view_layout:
           grid-area: övrigt
-        columns: 1
+        columns: 2
         cards:
 
           - type: custom:swipe-card
