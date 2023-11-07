@@ -11,10 +11,10 @@ settings:
     translate_update_available: galimas atnaujinimas
     translate_updates_available: galimi atnaujinimai
 
-    translate_on: På
-    translate_off: Av
-    translate_cool: Kyla
-    translate_fan_only: Endast fläkt
-    translate_playing: Spelar
-    translate_paused: Pausad
-    translate_standby: Viloläge
+    translate_on: Įjungta
+    translate_off: Išjungta
+    translate_cool: Vėsina
+    translate_fan_only: Tik ventiliatorius
+    translate_playing: Groja
+    translate_paused: Pauzė
+    translate_standby: Miego režimas
