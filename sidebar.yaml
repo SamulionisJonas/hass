@@ -122,8 +122,8 @@
                 {% set gates_open = gates | selectattr('state', 'eq', 'on') | list %}
                 {% set other_doors_open = other_doors | selectattr('state', 'eq', 'on') | list %}
 
-                {% set gates_name = gates_open | map(attribute='name') | join(', ') %}
-                {% set other_doors_name = other_doors_open | map(attribute='name') | join(', ') %}
+                {% set gates_name = gates_open | map(attribute='name') | join(' ir ') if gates_open | length > 1 else gates_open | map(attribute='name') | join('') %}
+                {% set other_doors_name = other_doors_open | map(attribute='name') | join(' ir ') if other_doors_open | length > 1 else other_doors_open | map(attribute='name') | join('') %}
 
                 {% if gates_open | length > 1 %}
                     {{ gates_name }} atidaryti
