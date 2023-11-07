@@ -113,8 +113,7 @@
                 ] %}
 
                 {% set doors = [
-                  states.sensor.front_door,
-                  states.sensor.back_door
+                  states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input
                 ] %}
 
                 {% set motions_on = motions | selectattr('state','eq','on') | list %}
