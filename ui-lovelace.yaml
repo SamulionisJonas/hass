@@ -291,7 +291,7 @@ views:
         title: Media
         view_layout:
           grid-area: media
-        columns: 1
+        columns: 2
         cards:
 
           - type: custom:swipe-card
@@ -416,7 +416,7 @@ views:
         title: Kita
         view_layout:
           grid-area: övrigt
-        columns: 2
+        columns: 1
         cards:
 
           - type: custom:swipe-card
@@ -426,7 +426,7 @@ views:
               threshold: 5
             cards:
 
-              - type: horizontal-stack
+              - type: grid
                 cards:
 
                   - type: custom:button-card
