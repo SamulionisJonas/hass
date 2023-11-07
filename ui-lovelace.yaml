@@ -435,6 +435,7 @@ views:
                     name: Terasa
                     template:
                       - light
+                      - base
                       - icon_spot
 
                   - type: custom:button-card
