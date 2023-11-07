@@ -28,6 +28,7 @@ browser_mod:
                               return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
                             });
 
+<<<<<<< HEAD
                 - type: custom:apexcharts-card
                   graph_span: 1d
                   header:
@@ -43,3 +44,40 @@ browser_mod:
                             return entity.attributes.raw_tomorrow.map((start, index) => {
                               return [new Date(start["start"]).getTime(), entity.attributes.raw_tomorrow[index]["value"]];
                             });
+=======
+        #kwh
+        - type: custom:apexcharts-card      
+          graph_span: 24h
+          header:
+            title: Šiandienos kainos - [[sensor.nordpool_kwh_lt_eur_3_095_021]] EUR
+            show: true
+            show_states: true
+          span:
+            start: day
+          now:
+            show: true
+            label: Dabar
+          series:
+            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+              type: column
+              data_generator: |
+                return entity.attributes.raw_today.map((start, index) => {
+                  return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
+                });
+
+        - type: custom:apexcharts-card
+          graph_span: 1d
+          header:
+            title: Rytojaus kainos
+            show: true
+          span:
+            start: day
+            offset: +1d
+          series:
+            - entity: sensor.nordpool_kwh_lt_eur_3_095_021
+              type: column
+              data_generator: |
+                return entity.attributes.raw_tomorrow.map((start, index) => {
+                  return [new Date(start["start"]).getTime(), entity.attributes.raw_tomorrow[index]["value"]];
+                });
+>>>>>>> 917c0b3 (add changes)

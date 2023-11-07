@@ -86,9 +86,9 @@
             vacuum: >
                 {% set entity_id = 'vacuum.roborock_s7' %}
                 {% if is_state(entity_id, 'cleaning') %}
-                  <b>Morty dammsuger</b>
+                  <b>Siurbia</b>
                 {% elif is_state(entity_id, 'returning') %}
-                  <b>Morty är färdig</b>
+                  <b>Siurblys baigė darbus</b>
                 {% endif %}
             weather: >
                 {% set entity = 'weather.openweathermap' %}
@@ -99,30 +99,6 @@
                     else "nusimato " + precip | string + 'mm kritulių \u2614\uFE0F' }}
                 {% else %}
                   Nepavyko įkelti orų...
-                {% endif %}
-            laundry: >
-                {% set start_time = state_attr('calendar.tvatta', 'start_time') %}
-                {% if start_time != None %}
-                  {% set time = as_timestamp(start_time) | timestamp_custom('%H:%M') %}
-                  {% set hours = as_timestamp(start_time) | timestamp_custom('%H') | int(default=0) / 24 %}
-                  {% set count = (as_timestamp(start_time) - as_timestamp(now())) / 86400 - hours %}
-                  {% set day = strptime(start_time, '%Y-%m-%d %H:%M:%S').strftime('%A')
-                  | replace('Monday', 'Måndag')
-                  | replace('Tuesday', 'Tisdag')
-                  | replace('Wednesday', 'Onsdag')
-                  | replace('Thursday', 'Torsdag')
-                  | replace('Friday', 'Fredag')
-                  | replace('Saturday', 'Lördag')
-                  | replace('Sunday', 'Söndag') %}
-                  {% if count <= 0.0 %}
-                    {{'\U0001F4A6'}} Tvätt idag {{ time }}
-                  {% elif count <= 1.0 %}
-                    Tvätt imorgon klockan {{ time }}
-                  {% elif count <= 2.0 %}
-                    Tvätt i övermorgon klockan {{ time }}
-                  {% else %}
-                    Tvätt om {{ (count + hours) | round }} dagar på {{ day }} kl {{ time }}
-                  {% endif %}
                 {% endif %}
             battery: >
                 {% set entities = states.sensor
@@ -135,3 +111,47 @@
                   Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
                   {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
                 {% endfor %}
+            movement: >
+                <b>
+                {% set motion_sensors = [
+                  binary_sensor.darbo_kambarys_2a_motion,
+                  binary_sensor.koridorius_2a_motion,
+                  binary_sensor.miegamasis_2a_motion,
+                  binary_sensor.garazas_motion,
+                  binary_sensor.katiline_pir_motion,
+                  binary_sensor.koridorius_motion,
+                  binary_sensor.vonia_motion,
+                  binary_sensor.svetaine_motion,
+                  binary_sensor.kambarys_motion,
+                ] %}
+
+                {% set door_sensors = [
+                  binary_sensor.garazo_durys_contact,
+                  binary_sensor.garazo_vartai_contact,
+                  binary_sensor.katlines_durys_contact,
+                  binary_sensor.pagrindinis_iejimas_contact,
+                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
+                ] %}
+
+                {% set active_motion_sensors = motion_sensors | selectattr('state', 'eq', 'detected') | list %}
+                {% set clear_motion_sensors = motion_sensors | selectattr('state', 'eq', 'clear') | list %}
+
+                {% set active_door_sensors = door_sensors | selectattr('state', 'eq', 'open') | list %}
+                {% set clear_door_sensors = door_sensors | selectattr('state', 'eq', 'closed') | list %}
+
+                {% set active_motion_sensor_names = active_motion_sensors | map(attribute='name') | join(', ') %}
+                {% set clear_motion_sensor_names = clear_motion_sensors | map(attribute='name') | join(', ') %}
+                {% set active_door_sensor_names = active_door_sensors | map(attribute='name') | join(', ') %}
+                {% set clear_door_sensor_names = clear_door_sensors | map(attribute='name') | join(', ') %}
+
+                {% if active_motion_sensors | length > 0 and active_door_sensors | length > 0 %}
+                  {{ active_motion_sensor_names }} detected and {{ active_door_sensor_names }} open
+                {% elif active_motion_sensors | length > 0 %}
+                  {{ active_motion_sensor_names }} detected
+                {% elif active_door_sensors | length > 0 %}
+                  {{ active_door_sensor_names }} open
+                {% else %}
+                  <font color='#6a7377'>Nothing happening</font>
+                {% endif %}
+                </b>
+

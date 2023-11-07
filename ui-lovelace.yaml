@@ -414,39 +414,36 @@ views:
       #################################################
 
       - type: grid
-        title: Övrigt
+        title: Kita
         view_layout:
           grid-area: övrigt
         columns: 2
         cards:
 
           - type: custom:button-card
-            entity: light.badrum_group
-            name: Badrum
+            entity: light.terrasse
+            name: Terasa
             template:
               - light
-              - icon_bathroom
+              - icon_spot
 
           - type: custom:button-card
-            entity: switch.gosund_fan_switch
-            name: "Fläkt\u00B2"
-            double_tap_action:
-              !include popup/studio_flakt.yaml
+            entity: light.forest_side
+            name: Miškas
             template:
-              - base
-              - icon_fan2
-              - loader
+              - light
+              - icon_spot
 
           - type: custom:button-card
             entity: light.garderob_lampa
-            name: Garderob
+            name: Įėjimas
             template:
               - light
               - icon_closet
 
           - type: custom:button-card
             entity: light.hall_group
-            name: Hall
+            name: Vartai
             template:
               - light
               - icon_spot
@@ -517,7 +514,7 @@ views:
 
           - type: custom:button-card
             name: >
-              <ha-icon icon="mdi:nas"></ha-icon> NAS
+              <ha-icon icon="mdi:nas"></ha-icon> RSPI
             tap_action:
               !include popup/footer_nas.yaml
             triggers_update:
@@ -541,7 +538,7 @@ views:
           - type: custom:button-card
             entity: sensor.template_updates
             name: >
-              <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Uppdatera
+              <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Atnaujimai
             tap_action:
               !include popup/footer_updates.yaml
             variables:
@@ -553,7 +550,7 @@ views:
 
           - type: custom:button-card
             name: >
-              <ha-icon icon="mdi:robot-vacuum-variant"></ha-icon> Städa
+              <ha-icon icon="mdi:robot-vacuum-variant"></ha-icon> Siurblys
             tap_action:
               !include popup/footer_vacuum.yaml
             triggers_update:
