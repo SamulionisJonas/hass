@@ -126,12 +126,12 @@ views:
               - icon_shade
 
           - type: custom:button-card
-            entity: media_player.sony_bravia_tv
+            entity: media_player.samsung_tv
             name: Tv
             state_display: >
               [[[
                 if (variables.state === 'playing') {
-                    return 'På';
+                    return 'Įjungtas';
                 }
                 if (variables.state === true) {
                     return variables.translate_unknown;
@@ -145,13 +145,13 @@ views:
               - loader
 
           - type: custom:button-card
-            entity: switch.deltaco_sh_p01_socket
-            name: Balkong
+            entity: switch.ps5_635_power
+            name: Playstation
             double_tap_action:
-              !include popup/vardagsrum_balkong.yaml
+              !include popup/sovrum_playstation.yaml
             template:
               - base
-              - icon_hue
+              - icon_ps5
               - loader
 
       #################################################
@@ -412,41 +412,61 @@ views:
       #                    ÖVRIGT                     #
       #                                               #
       #################################################
-
       - type: grid
         title: Kita
         view_layout:
           grid-area: övrigt
-        columns: 2
+        columns: 1
         cards:
 
-          - type: custom:button-card
-            entity: light.terrasse
-            name: Terasa
-            template:
-              - light
-              - icon_spot
+          - type: custom:swipe-card
+            parameters:
+              speed: 550
+              spaceBetween: 40
+              threshold: 5
+            cards:
 
-          - type: custom:button-card
-            entity: light.forest_side
-            name: Miškas
-            template:
-              - light
-              - icon_spot
+              - type: horizontal-stack
+                cards:
 
-          - type: custom:button-card
-            entity: light.garderob_lampa
-            name: Įėjimas
-            template:
-              - light
-              - icon_closet
+                  - type: custom:button-card
+                    entity: light.terrasse
+                    name: Terasa
+                    template:
+                      - light
+                      - icon_spot
 
-          - type: custom:button-card
-            entity: light.hall_group
-            name: Vartai
-            template:
-              - light
-              - icon_spot
+                  - type: custom:button-card
+                    entity: light.forest_side
+                    name: Miškas
+                    template:
+                      - light
+                      - icon_spot
+
+                  - type: custom:button-card
+                    entity: light.garderob_lampa
+                    name: Įėjimas
+                    template:
+                      - light
+                      - icon_closet
+
+                  - type: custom:button-card
+                    entity: light.hall_group
+                    name: Vartai
+                    template:
+                      - light
+                      - icon_spot
+
+              - type: grid
+                columns: 2
+                cards:
+
+                  - type: custom:button-card
+                    entity: light.hall_group
+                    name: Garažas
+                    template:
+                      - light
+                      - icon_spot
 
       #################################################
       #                                               #
@@ -475,12 +495,12 @@ views:
               - circle
 
           - type: custom:button-card
-            entity: person.sanja
-            name: Sanja
+            entity: person.paulina
+            name: Paulina
             triggers_update:
               - sensor.sanja_last_changed
             double_tap_action:
-              !include popup/hemma_sanja.yaml
+              !include popup/home_paulina.yaml
             variables:
               retain: sensor.sanja_last_changed
             template:
