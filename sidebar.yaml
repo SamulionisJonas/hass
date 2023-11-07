@@ -114,35 +114,30 @@
             movement: >
                 <b>
                 {% set motion_sensors = [
-                  binary_sensor.darbo_kambarys_2a_motion,
-                  binary_sensor.koridorius_2a_motion,
-                  binary_sensor.miegamasis_2a_motion,
-                  binary_sensor.garazas_motion,
-                  binary_sensor.katiline_pir_motion,
-                  binary_sensor.koridorius_motion,
-                  binary_sensor.vonia_motion,
-                  binary_sensor.svetaine_motion,
-                  binary_sensor.kambarys_motion,
+                  'binary_sensor.darbo_kambarys_2a_motion',
+                  'binary_sensor.koridorius_2a_motion',
+                  'binary_sensor.miegamasis_2a_motion',
+                  'binary_sensor.garazas_motion',
+                  'binary_sensor.katiline_pir_motion',
+                  'binary_sensor.koridorius_motion',
+                  'binary_sensor.vonia_motion',
+                  'binary_sensor.svetaine_motion',
+                  'binary_sensor.kambarys_motion',
                 ] %}
 
                 {% set door_sensors = [
-                  binary_sensor.garazo_durys_contact,
-                  binary_sensor.garazo_vartai_contact,
-                  binary_sensor.katlines_durys_contact,
-                  binary_sensor.pagrindinis_iejimas_contact,
-                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
+                  'binary_sensor.garazo_durys_contact',
+                  'binary_sensor.garazo_vartai_contact',
+                  'binary_sensor.katlines_durys_contact',
+                  'binary_sensor.pagrindinis_iejimas_contact',
+                  'binary_sensor.shellyplus1_7c87ce63c130_input_0_input',
                 ] %}
 
-                {% set active_motion_sensors = motion_sensors | selectattr('state', 'eq', 'on') | list %}
-                {% set clear_motion_sensors = motion_sensors | selectattr('state', 'eq', 'off') | list %}
-
-                {% set active_door_sensors = door_sensors | selectattr('state', 'eq', 'on') | list %}
-                {% set clear_door_sensors = door_sensors | selectattr('state', 'eq', 'off') | list %}
+                {% set active_motion_sensors = states | selectattr('entity_id', 'in', motion_sensors) | selectattr('state', 'eq', 'on') | list %}
+                {% set active_door_sensors = states | selectattr('entity_id', 'in', door_sensors) | selectattr('state', 'eq', 'on') | list %}
 
                 {% set active_motion_sensor_names = active_motion_sensors | map(attribute='name') | join(', ') %}
-                {% set clear_motion_sensor_names = clear_motion_sensors | map(attribute='name') | join(', ') %}
                 {% set active_door_sensor_names = active_door_sensors | map(attribute='name') | join(', ') %}
-                {% set clear_door_sensor_names = clear_door_sensors | map(attribute='name') | join(', ') %}
 
                 {% if active_motion_sensors | length > 0 and active_door_sensors | length > 0 %}
                   {{ active_motion_sensor_names }} detected and {{ active_door_sensor_names }} open
@@ -154,4 +149,3 @@
                   <font color='#6a7377'>Nothing happening</font>
                 {% endif %}
                 </b>
-
