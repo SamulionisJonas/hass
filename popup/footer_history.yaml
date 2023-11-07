@@ -13,7 +13,7 @@ browser_mod:
                 - type: custom:apexcharts-card
                   graph_span: 24h
                   header:
-                      title: Šiandienos kainos - {{sensor.nordpool_kwh_lt_eur_3_095_021}} EUR
+                      title: Šiandienos kainos kWh/EUR
                       show: true
                   span:
                       start: day
@@ -31,7 +31,7 @@ browser_mod:
                 - type: custom:apexcharts-card
                   graph_span: 1d
                   header:
-                      title: Rytojaus kainos
+                      title: Rytojaus kainos kWh/EUR
                       show: true
                   span:
                       start: day
