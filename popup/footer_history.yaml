@@ -11,28 +11,11 @@ browser_mod:
             cards:
                 #kwh
                 - type: custom:apexcharts-card
-                  graph_span: 24h
-                  header:
-                      title: Šiandienos kainos kWh/EUR
-                      show: true
-                  span:
-                      start: day
-                  now:
-                      show: true
-                      label: Dabar
-                  series:
-                      - entity: sensor.nordpool_kwh_lt_eur_3_095_021
-                        type: column
-                        data_generator: |
-                            return entity.attributes.raw_today.map((start, index) => {
-                              return [new Date(start["start"]).getTime(), entity.attributes.raw_today[index]["value"]];
-                            });
-
-                - type: custom:apexcharts-card
                   graph_span: 1d
                   header:
                       title: Rytojaus kainos kWh/EUR
                       show: true
+                      show_states: true
                   span:
                       start: day
                       offset: +1d
