@@ -122,7 +122,7 @@
                   binary_sensor.koridorius_motion,
                   binary_sensor.vonia_motion,
                   binary_sensor.svetaine_motion,
-                  binary_sensor.kambarys_motion,
+                  binary_sensor.kambarys_motion
                 ] %}
 
                 {% set door_sensors = [
@@ -130,8 +130,11 @@
                   binary_sensor.garazo_vartai_contact,
                   binary_sensor.katlines_durys_contact,
                   binary_sensor.pagrindinis_iejimas_contact,
-                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
+                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input
                 ] %}
+
+                {% set debug_output = "Active Motion Sensors: " ~ active_motion_sensors | list ~ ", Active Door Sensors: " ~ active_door_sensors | list %}
+                {{ debug_output }}
 
                 {% set active_motion_sensors = states | selectattr('entity_id', 'in', motion_sensors) | selectattr('state', 'eq', 'on') | list %}
                 {% set active_door_sensors = states | selectattr('entity_id', 'in', door_sensors) | selectattr('state', 'eq', 'on') | list %}
