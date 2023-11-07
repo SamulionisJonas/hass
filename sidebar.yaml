@@ -78,11 +78,6 @@
                   <font color='#6a7377'>Viskas išjungta</font>
                 {% endif %}
                 </b>
-            mailbox: >
-                {% set mailbox = states('sensor.mailbox') %}
-                {% if mailbox | int(default=0) > 0 %}
-                  {{ '\U0001F4EC' }} <font color='#6a7377'><b>Brevlåda ({{ mailbox }})</b></font>
-                {% endif %}
             vacuum: >
                 {% set entity_id = 'vacuum.roborock_s7' %}
                 {% if is_state(entity_id, 'cleaning') %}
@@ -110,7 +105,49 @@
                   'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}
                   Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
                   {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
-                {% endfor %}  
+                {% endfor %}
+            test: >
+                <b>
+                {% set motions = [
+                  states.binary_sensor.darbo_kambarys_2a_motion
+                ] %}
+
+                {% set doors = [
+                  states.sensor.front_door,
+                  states.sensor.back_door
+                ] %}
+
+                {% set motions_on = motions | selectattr('state','eq','on') | list %}
+                {% set motions_name = motions | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
+
+                {% set doors_open = doors | selectattr('state','eq','open') | list %}
+                {% set doors_name = doors_open | map(attribute='name') | join(', ') %}
+
+                {% if (motions_on | length == 0) and (doors_open | length > 0) %}
+                  {{ doors_name | regex_replace(',([^,]*)$',' ir \\1') }} atidarytos
+
+                {% elif (motions_on | length == 1) and (doors_open | length == 1) %}
+                  {{ motions_name }} ir {{doors_name }} atidarytos
+
+                {% elif (motions_on | length == 1) and (doors_open | length > 1) %}
+                  {{ motions_name }}, {{ doors_name | regex_replace(',([^,]*)$',' ir\\1') }} atidarytos
+
+                {% elif (motions_on | length > 1) and (doors_open | length == 1) %}
+                  {{ motions_on | length }} judesio davikliai ir {{ doors_name }} atidarytos
+
+                {% elif (motions_on | length > 1) and (doors_open | length > 1) %}
+                  {{ motions_on | length }} judesio davikliai, {{ doors_name | regex_replace(',([^,]*)$',' ir\\1') }} atidarytos
+
+                {% elif (motions_on | length == 1) and (doors_open | length == 0) %}
+                  {{ motions_name }} atidaryti
+
+                {% elif (motions_on | length > 1) and (doors_open | length == 0) %}
+                  {{ motions_on | length }} judesio davikliai atidaryti
+
+                {% else %}
+                  <font color='#6a7377'>Viskas uždaryta</font>
+                {% endif %}
+                </b>
             movement: >
                 <b>
                 {% set motion_sensors = [
