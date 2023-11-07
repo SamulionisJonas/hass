@@ -110,55 +110,28 @@
                   'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}
                   Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
                   {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
-                {% endfor %}
-            test: >
-                {% set motion_sensors = [
-                  binary_sensor.darbo_kambarys_2a_motion,
-                  binary_sensor.koridorius_2a_motion,
-                  binary_sensor.miegamasis_2a_motion,
-                  binary_sensor.garazas_motion,
-                  binary_sensor.katiline_pir_motion,
-                  binary_sensor.koridorius_motion,
-                  binary_sensor.vonia_motion,
-                  binary_sensor.svetaine_motion,
-                  binary_sensor.kambarys_motion
-                ] %}
-
-                {% set door_sensors = [
-                  binary_sensor.garazo_durys_contact,
-                  binary_sensor.garazo_vartai_contact,
-                  binary_sensor.katlines_durys_contact,
-                  binary_sensor.pagrindinis_iejimas_contact,
-                  binary_sensor.shellyplus1_7c87ce63c130_input_0_input
-                ] %}
-                     Ą{% set lights = [
-                  states.light.forest_side,
-                  states.light.terrasse
-                ] %}    
+                {% endfor %}  
             movement: >
                 <b>
                 {% set motion_sensors = [
-                  states.binary_sensor.darbo_kambarys_2a_motion,
-                  states.binary_sensor.koridorius_2a_motion,
-                  states.binary_sensor.miegamasis_2a_motion,
-                  states.binary_sensor.garazas_motion,
-                  states.binary_sensor.katiline_pir_motion,
-                  states.binary_sensor.koridorius_motion,
-                  states.binary_sensor.vonia_motion,
-                  states.binary_sensor.svetaine_motion,
-                  states.binary_sensor.kambarys_motion
+                  'binary_sensor.darbo_kambarys_2a_motion',
+                  'binary_sensor.koridorius_2a_motion',
+                  'binary_sensor.miegamasis_2a_motion',
+                  'binary_sensor.garazas_motion',
+                  'binary_sensor.katiline_pir_motion',
+                  'binary_sensor.koridorius_motion',
+                  'binary_sensor.vonia_motion',
+                  'binary_sensor.svetaine_motion',
+                  'binary_sensor.kambarys_motion'
                 ] %}
 
                 {% set door_sensors = [
-                  states.binary_sensor.garazo_durys_contact,
-                  states.binary_sensor.garazo_vartai_contact,
-                  states.binary_sensor.katlines_durys_contact,
-                  states.binary_sensor.pagrindinis_iejimas_contact,
-                  states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input
+                  'binary_sensor.garazo_durys_contact',
+                  'binary_sensor.garazo_vartai_contact',
+                  'binary_sensor.katlines_durys_contact',
+                  'binary_sensor.pagrindinis_iejimas_contact',
+                  'binary_sensor.shellyplus1_7c87ce63c130_input_0_input'
                 ] %}
-
-                {% set debug_output = "Active Motion Sensors: " ~ active_motion_sensors | list ~ ", Active Door Sensors: " ~ active_door_sensors | list %}
-                {{ debug_output }}
 
                 {% set active_motion_sensors = states | selectattr('entity_id', 'in', motion_sensors) | selectattr('state', 'eq', 'on') | list %}
                 {% set active_door_sensors = states | selectattr('entity_id', 'in', door_sensors) | selectattr('state', 'eq', 'on') | list %}
