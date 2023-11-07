@@ -133,11 +133,11 @@
                   binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
                 ] %}
 
-                {% set active_motion_sensors = motion_sensors | selectattr('state', 'eq', 'detected') | list %}
-                {% set clear_motion_sensors = motion_sensors | selectattr('state', 'eq', 'clear') | list %}
+                {% set active_motion_sensors = motion_sensors | selectattr('state', 'eq', 'on') | list %}
+                {% set clear_motion_sensors = motion_sensors | selectattr('state', 'eq', 'off') | list %}
 
-                {% set active_door_sensors = door_sensors | selectattr('state', 'eq', 'open') | list %}
-                {% set clear_door_sensors = door_sensors | selectattr('state', 'eq', 'closed') | list %}
+                {% set active_door_sensors = door_sensors | selectattr('state', 'eq', 'on') | list %}
+                {% set clear_door_sensors = door_sensors | selectattr('state', 'eq', 'off') | list %}
 
                 {% set active_motion_sensor_names = active_motion_sensors | map(attribute='name') | join(', ') %}
                 {% set clear_motion_sensor_names = clear_motion_sensors | map(attribute='name') | join(', ') %}
