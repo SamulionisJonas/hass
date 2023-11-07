@@ -162,7 +162,7 @@
                 ] %}
 
                 {% set doors = [
-                  states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input
+                  states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
                   states.binary_sensor.garazo_durys_contact,
                   states.binary_sensor.garazo_vartai_contact,
                   states.binary_sensor.katlines_durys_contact,
