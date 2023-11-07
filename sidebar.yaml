@@ -106,64 +106,36 @@
                   Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
                   {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
                 {% endfor %}
-            test: >
-                <b>
-                {% set motions = [
-                  states.binary_sensor.darbo_kambarys_2a_motion
-                ] %}
-
-                {% set doors = [
-                  states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input
-                ] %}
-
-                {% set motions_on = motions | selectattr('state','eq','on') | list %}
-                {% set motions_name = motions | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
-
-                {% set doors_open = doors | selectattr('state','eq','on') | list %}
-                {% set doors_name = doors_open | map(attribute='name') | join(', ') %}
-
-                {% if (motions_on | length == 0) and (doors_open | length > 0) %}
-                  {{ doors_name | regex_replace(',([^,]*)$',' ir \\1') }} atidarytos
-
-                {% elif (motions_on | length == 1) and (doors_open | length == 1) %}
-                  {{ motions_name }} ir {{doors_name }} atidarytos
-
-                {% elif (motions_on | length == 1) and (doors_open | length > 1) %}
-                  {{ motions_name }}, {{ doors_name | regex_replace(',([^,]*)$',' ir\\1') }} atidarytos
-
-                {% elif (motions_on | length > 1) and (doors_open | length == 1) %}
-                  {{ motions_on | length }} judesio davikliai ir {{ doors_name }} atidarytos
-
-                {% elif (motions_on | length > 1) and (doors_open | length > 1) %}
-                  {{ motions_on | length }} judesio davikliai, {{ doors_name | regex_replace(',([^,]*)$',' ir\\1') }} atidarytos
-
-                {% elif (motions_on | length == 1) and (doors_open | length == 0) %}
-                  {{ motions_name }} atidaryti
-
-                {% elif (motions_on | length > 1) and (doors_open | length == 0) %}
-                  {{ motions_on | length }} judesio davikliai atidaryti
-
-                {% else %}
-                  <font color='#6a7377'>Viskas uždaryta</font>
-                {% endif %}
-                </b>
             doors_open: >
                 <b>
-                {% set doors = [
-                    states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
-                    states.binary_sensor.garazo_durys_contact,
+                {% set gates = [
                     states.binary_sensor.garazo_vartai_contact,
+                    states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
+                ] %}
+
+                {% set other_doors = [
+                    states.binary_sensor.garazo_durys_contact,
                     states.binary_sensor.katlines_durys_contact,
                     states.binary_sensor.pagrindinis_iejimas_contact,
                 ] %}
 
-                {% set doors_open = doors | selectattr('state','eq','on') | list %}
-                {% set doors_name = doors_open | map(attribute='name') | join(', ') %}
+                {% set gates_open = gates | selectattr('state', 'eq', 'on') | list %}
+                {% set other_doors_open = other_doors | selectattr('state', 'eq', 'on') | list %}
 
-                {% if doors_open | length > 0 %}
-                    {{ doors_name | regex_replace(',([^,]*)$',' ir \\1') }} atidaryti
+                {% set gates_name = gates_open | map(attribute='name') | join(', ') %}
+                {% set other_doors_name = other_doors_open | map(attribute='name') | join(', ') %}
+
+                {% if gates_open | length > 1 %}
+                    {{ gates_name }} atidaryti
+                {% elif gates_open | length == 1 and other_doors_open | length > 0 %}
+                    {{ gates_name }} ir {{ other_doors_name | default('Durys') }} atidarytos
+                {% elif gates_open | length == 1 and other_doors_open | length == 0 %}
+                    {{ gates_name }} atidaryti
+                {% elif other_doors_open | length == 1 and gates_open | length > 0 %}
+                    {{ other_doors_name }} atidarytos
+                {% elif other_doors_open | length == 1 and gates_open | length == 0 %}
+                    {{ other_doors_name }} atidaryta
                 {% else %}
                     <font color='#6a7377'>Viskas uždaryta</font>
                 {% endif %}
                 </b>
-
