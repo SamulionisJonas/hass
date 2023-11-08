@@ -15,6 +15,6 @@ browser_mod:
           entities:
             - entity: switch.home_garage
 
-            - type: picture-entity
-              entity: camera.carport
-              camera_view: live
+            - type: custom:frigate-card
+              cameras:
+                - webrtc_card: camera.carport
