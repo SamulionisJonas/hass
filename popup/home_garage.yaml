@@ -8,5 +8,6 @@ browser_mod:
       cards:
         - entity: switch.home_garage
 
-        - type: custom:camera-card
+        - type: picture-entity
           entity: camera.carport
+          camera_view: live
