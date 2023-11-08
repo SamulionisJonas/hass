@@ -194,34 +194,7 @@ binary_sensor:
     sensors:
       garage_gates_combined:
         friendly_name: "Garage Gates Combined"
-        value_template: "{{ is_state('binary_sensor.shellyplus1_7c87ce63c130_input_0_input', 'on') and is_state('binary_sensor.garazo_vartai_contact', 'on') }}"
-
-switch:
-  - platform: template
-    switches:
-      garage_gate_switch:
-        friendly_name: "Garage Gate Switch"
-        value_template: "{{ is_state('binary_sensor.garazo_vartai_contact', 'on') }}"
-        turn_on:
-          service: switch.turn_on
-          target:
-            entity_id: switch.home_garage
-        turn_off:
-          service: switch.turn_off
-          target:
-            entity_id: switch.home_garage
-      outdoor_gates_switch:
-        friendly_name: "Garage Gate Switch"
-        value_template: "{{ is_state('binary_sensor.shellyplus1_7c87ce63c130_input_0_input', 'on') }}"
-        turn_on:
-          service: switch.turn_on
-          target:
-            entity_id: switch.shellyplus1_7c87ce63c130_switch_0
-        turn_off:
-          service: switch.turn_off
-          target:
-            entity_id: switch.shellyplus1_7c87ce63c130_switch_0
-
+        value_template: "{{ is_state('binary_sensor.garage_gate1', 'off') and is_state('binary_sensor.garage_gate2', 'off') }}"
 
 script: !include scripts.yaml
 automation: !include automations.yaml

@@ -13,11 +13,34 @@ browser_mod:
           card_mod:
             class: content
           entities:
+            - entity: binary_sensor.garazo_vartai_contact
+              # Style for the first binary sensor
+              style: |
+                ha-card {
+                  --paper-item-icon-color: var(--state-icon-color-open);
+                }
 
-            - entity: switch.garage_gate_switch
-            
-            - entity: switch.outdoor_gates_switch
- 
+            - entity: switch.home_garage
+              # Style for the first switch based on the state of the first binary sensor
+              style: |
+                ha-card {
+                  --paper-item-icon-color: var(--state-icon-color-closed);
+                }
+
+            - entity: binary_sensor.shellyplus1_7c87ce63c130_input_0_input
+              # Style for the second binary sensor
+              style: |
+                ha-card {
+                  --paper-item-icon-color: var(--state-icon-color-open);
+                }
+
+            - entity: switch.shellyplus1_7c87ce63c130_switch_0
+              # Style for the second switch based on the state of the second binary sensor
+              style: |
+                ha-card {
+                  --paper-item-icon-color: var(--state-icon-color-closed);
+                }
+
             - type: custom:frigate-card
               cameras:
                 - camera_entity: camera.carport

@@ -34,11 +34,8 @@ base:
         const stateDict = {
           'on': variables.translate_open,
           'off': variables.translate_closed,
-          'cool': variables.translate_cool,
-          'fan_only': variables.translate_fan_only,
         };
-        if (variables.state === true) return variables.translate_unknown;
-        return stateDict[variables.state];
+        return stateDict[variables.state] || variables.state;
       } else {
         // Use the default state translations for other entities
         return variables.state;
