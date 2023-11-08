@@ -18,7 +18,7 @@ browser_mod:
             - type: custom:frigate-card
               cameras:
                 - camera_entity: camera.carport
-                  live_provider: webrtc-card
+                  live_provider: go2rtc
               live:
                 webrtc_card:
                   ui: true
