@@ -4,17 +4,17 @@ browser_mod:
   data:
     title: Garažo vartai
     content:
-      type: custom:vertical-stack
+      type: vertical-stack
       cards:
+
         - type: entities
           state_color: true
           show_header_toggle: false
           card_mod:
             class: content
           entities:
+            - entity: switch.home_garage
 
-          - entity: switch.home_garage
-
-          - type: picture-entity
-            entity: camera.carport
-            camera_view: live
+            - type: picture-entity
+              entity: camera.carport
+              camera_view: live
