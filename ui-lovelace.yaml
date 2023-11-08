@@ -433,9 +433,8 @@ views:
                                   - icon_closet
 
                             - type: custom:button-card
-                              entity: switch.home_garage
-                              name: Garažas
-                              double_tap_action: !include popup/home_garage.yaml
+                              # entity: switch.home_garage
+                              name: Vartai
                               template:
                                 - base
                                 - loader
@@ -443,10 +442,9 @@ views:
                                 - value: 'on'  
                                   icon: 'mdi:gate-open'  
                                 - value: 'off'  
-                                  icon: 'mdi:gate-closed'  
-                   
-                              binary_sensor: binary_sensor.garazo_vartai_contact
-  
+                                  icon: 'mdi:gate-closed'
+                              tap_action: !include popup/home_garage.yaml
+                     
                       - type: grid
                         columns: 2
                         cards:
