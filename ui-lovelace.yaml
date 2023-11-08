@@ -493,8 +493,8 @@ views:
                       - icon_away
 
                 - type: custom:button-card
-                  entity: script.home_arrive
-                  name: Hemma
+                  entity: switch.alarm_switch
+                  name: Saugumas
                   template:
                       - base
                       - icon_home
