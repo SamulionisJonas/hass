@@ -6,8 +6,15 @@ browser_mod:
     content:
       type: custom:vertical-stack
       cards:
-        - entity: switch.home_garage
+        - type: entities
+          state_color: true
+          show_header_toggle: false
+          card_mod:
+            class: content
+          entities:
 
-        - type: picture-entity
-          entity: camera.carport
-          camera_view: live
+          - entity: switch.home_garage
+
+          - type: picture-entity
+            entity: camera.carport
+            camera_view: live
