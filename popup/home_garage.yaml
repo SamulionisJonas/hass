@@ -17,4 +17,4 @@ browser_mod:
 
             - type: custom:frigate-card
               cameras:
-                - webrtc_card: camera.carport
+                - camera_entity: camera.carport
