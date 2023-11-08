@@ -437,19 +437,14 @@ views:
                               name: Garažas
                               double_tap_action: !include popup/home_garage.yaml
                               template:
-                                - light
-                                - icon_spot
+                                - base
+                                - loader
                               state:
                                 - value: 'on'  
                                   icon: 'mdi:gate-open'  
-                                  styles:
-                                    card:
-                                      - color: green  
                                 - value: 'off'  
                                   icon: 'mdi:gate-closed'  
-                                  styles:
-                                    card:
-                                      - color: red
+                   
                               binary_sensor: binary_sensor.garazo_vartai_contact
   
                       - type: grid

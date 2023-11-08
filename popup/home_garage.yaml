@@ -4,17 +4,9 @@ browser_mod:
   data:
     title: Garažo vartai
     content:
-      type: vertical-stack
+      type: custom:vertical-stack
       cards:
-        - type: custom:button-card
-          entity: switch.home_garage
-          name: Gate Switch
-          icon: mdi:gate
-          show_state: true
-          tap_action:
-            action: toggle
+        - entity: switch.home_garage
 
-        - type: custom:button-card
+        - type: custom:camera-card
           entity: camera.carport
-          show_name: false
-          show_state: false
