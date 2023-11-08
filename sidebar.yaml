@@ -116,7 +116,7 @@
                 {% set other_doors = [
                     states.binary_sensor.garazo_durys_contact,
                     states.binary_sensor.katlines_durys_contact,
-                    states.binary_sensor.pagrindinis_iejimas_contact,
+                    states.binary_sensor.lauko_vartai,
                 ] %}
 
                 {% set gates_open = gates | selectattr('state', 'eq', 'on') | list %}

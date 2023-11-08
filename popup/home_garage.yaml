@@ -27,7 +27,7 @@ browser_mod:
                   --paper-item-icon-color: var(--state-icon-color-closed);
                 }
 
-            - entity: binary_sensor.shellyplus1_7c87ce63c130_input_0_input
+            - entity: binary_sensor.lauko_vartai
               # Style for the second binary sensor
               style: |
                 ha-card {
