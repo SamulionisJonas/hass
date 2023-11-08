@@ -194,7 +194,7 @@ binary_sensor:
     sensors:
       garage_gates_combined:
         friendly_name: "Garage Gates Combined"
-        value_template: "{{ is_state('binary_sensor.shellyplus1_7c87ce63c130_input_0_input', 'off') and is_state('binary_sensor.garazo_vartai_contact', 'off') }}"
+        value_template: "{{ is_state('binary_sensor.shellyplus1_7c87ce63c130_input_0_input', 'on') and is_state('binary_sensor.garazo_vartai_contact', 'on') }}"
 
 
 script: !include scripts.yaml
