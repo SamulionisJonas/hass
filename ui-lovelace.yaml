@@ -433,18 +433,18 @@ views:
                                   - icon_closet
 
                             - type: custom:button-card
-                              # entity: switch.home_garage
                               name: Vartai
                               template:
                                 - base
                                 - loader
+                              entity: binary_sensor.garage_gates_combined  # Use the combined binary sensor entity
                               state:
                                 - value: 'on'  
-                                  icon: 'mdi:gate-open'  
+                                  icon: 'mdi:gate-closed'  
                                 - value: 'off'  
-                                  icon: 'mdi:gate-closed'
+                                  icon: 'mdi:gate-open'
                               tap_action: !include popup/home_garage.yaml
-                     
+                 
                       - type: grid
                         columns: 2
                         cards:

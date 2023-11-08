@@ -189,6 +189,14 @@ cover:
                     mdi:garage
                   {% endif %}
 
+binary_sensor:
+  - platform: template
+    sensors:
+      garage_gates_combined:
+        friendly_name: "Garage Gates Combined"
+        value_template: "{{ is_state('binary_sensor.shellyplus1_7c87ce63c130_input_0_input', 'off') and is_state('binary_sensor.garazo_vartai_contact', 'off') }}"
+
+
 script: !include scripts.yaml
 automation: !include automations.yaml
 scene: !include scenes.yaml
