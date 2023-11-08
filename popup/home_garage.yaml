@@ -14,7 +14,13 @@ browser_mod:
             class: content
           entities:
             - entity: switch.home_garage
-
+            
             - type: custom:frigate-card
               cameras:
                 - camera_entity: camera.carport
+                  live_provider: webrtc-card
+                  webrtc_card:
+                    entity: camera.carport
+              live:
+                webrtc_card:
+                  ui: true
