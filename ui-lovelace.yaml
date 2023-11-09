@@ -151,15 +151,7 @@ views:
                       - loader
                   tap_action:
                       action: call-service
-                      service: >
-                          {% if is_state('media_player.playstation_4', 'standby') %}
-                            media_player.turn_on
-                          {% else %}
-                            media_player.turn_off
-                          {% endif %}
-                      target:
-                          device_id:
-                              - a7df8c02ee4644f4d77b8415fcb932aa
+                      service: script.ps4
 
           #################################################
           #                                               #
