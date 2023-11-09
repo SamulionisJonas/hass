@@ -149,6 +149,9 @@ views:
                       - base
                       - icon_ps5
                       - loader
+                  tap_action:
+                      action: call-service
+                      service: shell_command.turn_on_ps4
 
           #################################################
           #                                               #

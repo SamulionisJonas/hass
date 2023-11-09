@@ -277,7 +277,7 @@ icon_ps5:
     custom_fields:
         icon: >
             [[[
-              if (variables.state_idle && variables.timeout < 5000) {
+              if (variables.state_on && variables.timeout < 2000) {
                   return `
                     <svg viewBox="0 0 50 50">
                       <style>
@@ -310,7 +310,7 @@ icon_ps5:
                 `;
               }
 
-              return variables.state_on && variables.timeout > 5000
+              return variables.state_on && variables.timeout > 2000
                   ? `
                     <svg viewBox="0 0 50 50">
                       <path d="M33.1 33.6L26.7 36v-4.5l6.4 2.1h0zM19.4 29l-2.9-1h-.1L6 31.9h-.1-.1l6.3 2.1h.1l7.2-2.7V29zm0 5.1l-3.2 1.1-.3.1 3.5 1.2v-2.4zm17.4.7h0l-10.1 3.7v.4L33 41l10.6-4-6.8-2.2z" fill="#00aa9e" />

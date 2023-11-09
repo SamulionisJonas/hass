@@ -100,6 +100,8 @@ sensor:
           - 'time_date'
           - 'time_utc'
           - 'beat'
+shell_command:
+    turn_on_ps4: ps4-waker
 
 person:
     - name: Jonas
