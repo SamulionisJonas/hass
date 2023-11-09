@@ -151,7 +151,11 @@ views:
                       - loader
                   tap_action:
                       action: call-service
-                      service: shell_command.turn_on_ps4
+                      service: media_player.play_media
+                      service_data:
+                          entity_id: media_player.playstation_4
+                          media_content_id: WAKEUP
+                          media_content_type: COMMAND
 
           #################################################
           #                                               #
