@@ -103,18 +103,8 @@ sensor:
 
 command_line:
     - sensor:
-          name: Docker Status
-          command: 'ssh jonas@192.168.8.189 ''docker info --format "Total Containers: {{.Containers}} Running Containers: {{.ContainersRunning}} Paused Containers: {{.ContainersPaused}} Stopped Containers: {{.ContainersStopped}}'''
-          scan_interval: 60
-
-    - sensor:
-          name: Transmission Seed Status
-          command: "ssh jonas@192.168.8.189 'docker inspect -f {{.State.Status}} transmission_seed'"
-          scan_interval: 120
-
-    - sensor:
           name: External Server CPU Load
-          command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
+          command: 'ssh jonas@192.168.8.189 ''cat /proc/loadavg | awk "{print $1}"'''
           unit_of_measurement: '%'
           value_template: '{{ value | round(1) }}'
           scan_interval: 300
@@ -126,15 +116,18 @@ command_line:
           value_template: >
               {% set boot_info = value | replace('\n', '') %}
               {% set boot_datetime = as_datetime(boot_info) %}
-              {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
-              {% set days = uptime_duration // (24 * 3600) %}
-              {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
-              {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
+              {{ (now() - boot_datetime).humanize() }}
 
     - sensor:
-          name: Disk Temperature
-          command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
+          name: External Disk Temperature
+          command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk \"{print \\$10}\"'"
           unit_of_measurement: '°C'
+          scan_interval: 300
+
+    - sensor:
+          name: External Free RAM
+          command: "ssh jonas@192.168.8.189 'free -m | awk \\'/^Mem/ {print $4}\\''"
+          unit_of_measurement: 'MB'
           scan_interval: 300
 
 person:
