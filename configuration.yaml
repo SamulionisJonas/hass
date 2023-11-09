@@ -210,7 +210,7 @@ media_player:
 switch:
     - platform: wake_on_lan
       name: lg
-      mac_address: 'A8:23:FE:05:9C:&B'
+      mac: 'A8:23:FE:05:9C:7B'
 
 script: !include scripts.yaml
 automation: !include automations.yaml
