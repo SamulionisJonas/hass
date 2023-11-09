@@ -150,8 +150,13 @@ views:
                       - icon_ps5
                       - loader
                   tap_action:
-                      action: service
-                      service: media_player.turn_on
+                      action: call-service
+                      service: >
+                          {% if is_state('media_player.playstation_4', 'on') %}
+                            media_player.turn_off
+                          {% else %}
+                            media_player.turn_on
+                          {% endif %}
                       target:
                           entity_id: media_player.playstation_4
 
