@@ -100,6 +100,7 @@ sensor:
           - 'time_date'
           - 'time_utc'
           - 'beat'
+
     - platform: command
       name: Docker Status
       command: 'ssh jonas@192.168.8.189 ''docker info --format "Total Containers: {{.Containers}} Running Containers: {{.ContainersRunning}} Paused Containers: {{.ContainersPaused}} Stopped Containers: {{.ContainersStopped}}"'''
