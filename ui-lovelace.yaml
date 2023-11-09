@@ -116,7 +116,7 @@ views:
 
                 - type: custom:button-card
                   entity: light.vardagsrum_horna
-                  name: Hörnlampa
+                  name: Lempa
                   template:
                       - light
                       - icon_shade
@@ -545,7 +545,7 @@ views:
                 - type: custom:button-card
                   entity: sensor.template_updates
                   name: >
-                      <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Atnaujimai
+                      <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Atnaujinimai
                   tap_action: !include popup/footer_updates.yaml
                   variables:
                       notify: >
