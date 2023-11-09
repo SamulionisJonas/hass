@@ -110,6 +110,31 @@ sensor:
       command: "ssh jonas@192.168.8.189 'docker inspect -f {{.State.Status}} transmission_seed'"
       scan_interval: 120 # Adjusted scan interval
 
+    - platform: command_line
+      name: External Server CPU Load
+      command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
+      unit_of_measurement: '%'
+      value_template: '{{ value | round(1) }}'
+      scan_interval: 300
+
+    - platform: command_line
+      name: External Server Last Boot
+      command: "ssh jonas@192.168.8.189 'who -b'"
+      scan_interval: 300
+      value_template: >
+          {% set boot_info = value | replace('\n', '') %}
+          {% set boot_datetime = as_datetime(boot_info) %}
+          {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
+          {% set days = uptime_duration // (24 * 3600) %}
+          {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
+          {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
+
+    - platform: command_line
+      name: Disk Temperature
+      command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
+      unit_of_measurement: '°C'
+      scan_interval: 300
+
 person:
     - name: Jonas
       id: jonas
@@ -203,31 +228,6 @@ binary_sensor:
           garage_gates_combined:
               friendly_name: 'Garage Gates Combined'
               value_template: "{{ is_state('binary_sensor.garage_gate1', 'off') and is_state('binary_sensor.garage_gate2', 'off') }}"
-
-    - platform: command_line
-      name: External Server CPU Load
-      command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
-      unit_of_measurement: '%'
-      value_template: '{{ value | round(1) }}'
-      scan_interval: 300
-
-    - platform: command_line
-      name: External Server Last Boot
-      command: "ssh jonas@192.168.8.189 'who -b'"
-      scan_interval: 300
-      value_template: >
-          {% set boot_info = value | replace('\n', '') %}
-          {% set boot_datetime = as_datetime(boot_info) %}
-          {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
-          {% set days = uptime_duration // (24 * 3600) %}
-          {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
-          {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
-
-    - platform: command_line
-      name: Disk Temperature
-      command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
-      unit_of_measurement: '°C'
-      scan_interval: 300
 
 script: !include scripts.yaml
 automation: !include automations.yaml
