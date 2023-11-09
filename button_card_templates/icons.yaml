@@ -277,7 +277,8 @@ icon_ps5:
     custom_fields:
         icon: >
             [[[
-              if (entity.state && entity.state === 'Idle' && variables.timeout < 2000) {
+              console.log(variables, variables.state_on, variables.timeout)
+              if (variables.state_on && variables.timeout < 2000) {
                   return `
                     <svg viewBox="0 0 50 50">
                       <style>
