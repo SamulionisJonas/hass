@@ -152,7 +152,7 @@ views:
                   tap_action:
                       action: call-service
                       service: >
-                          {% if is_state('media_player.playstation_4', 'on') %}
+                          {% if is_state('media_player.playstation_4', 'Standby') %}
                             media_player.turn_off
                           {% else %}
                             media_player.turn_on
