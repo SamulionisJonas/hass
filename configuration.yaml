@@ -68,28 +68,28 @@ logger:
 
 sensor:
     - platform: nordpool
-      region: "LT"
-      currency: "EUR"
+      region: 'LT'
+      currency: 'EUR'
       VAT: True
       precision: 3
       low_price_cutoff: 0.95
       price_in_cents: false
       price_type: kWh
       additional_costs: |
-        {% set s = {
-            "day_night_switch_hour": 23,
-            "night_rate": 0.04719,
-            "day_rate": 0.07865,
-            "cert": 0.01
-        }
-        %}
+          {% set s = {
+              "day_night_switch_hour": 23,
+              "night_rate": 0.04719,
+              "day_rate": 0.07865,
+              "cert": 0.01
+          }
+          %}
 
-        {% if now().hour >= s.day_night_switch_hour or now().weekday() in [5, 6] %}
-            {{ s.night_rate + s.cert | float }}
-        {% else %}
-            {{ s.day_rate + s.cert | float }}
-        {% endif %}
-        
+          {% if now().hour >= s.day_night_switch_hour or now().weekday() in [5, 6] %}
+              {{ s.night_rate + s.cert | float }}
+          {% else %}
+              {{ s.day_rate + s.cert | float }}
+          {% endif %}
+
     - platform: time_date
       display_options:
           - 'time'
@@ -100,13 +100,21 @@ sensor:
           - 'time_date'
           - 'time_utc'
           - 'beat'
+    - platform: command_line
+      name: Docker Status
+      command: 'ssh jonas@192.168.8.189 ''docker info --format "Total Containers: {{.Containers}} Running Containers: {{.ContainersRunning}} Paused Containers: {{.ContainersPaused}} Stopped Containers: {{.ContainersStopped}}"'''
+      scan_interval: 60 # Adjusted scan interval
+
+    - platform: command_line
+      name: Transmission Seed Status
+      command: "ssh jonas@192.168.8.189 'docker inspect -f {{.State.Status}} transmission_seed'"
+      scan_interval: 120 # Adjusted scan interval
 
 person:
     - name: Jonas
       id: jonas
       device_trackers:
           - device_tracker.jonas_iphone
-
 
 waste_collection_schedule:
     sources:
@@ -190,11 +198,36 @@ cover:
                   {% endif %}
 
 binary_sensor:
-  - platform: template
-    sensors:
-      garage_gates_combined:
-        friendly_name: "Garage Gates Combined"
-        value_template: "{{ is_state('binary_sensor.garage_gate1', 'off') and is_state('binary_sensor.garage_gate2', 'off') }}"
+    - platform: template
+      sensors:
+          garage_gates_combined:
+              friendly_name: 'Garage Gates Combined'
+              value_template: "{{ is_state('binary_sensor.garage_gate1', 'off') and is_state('binary_sensor.garage_gate2', 'off') }}"
+
+    - platform: command_line
+      name: External Server CPU Load
+      command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
+      unit_of_measurement: '%'
+      value_template: '{{ value | round(1) }}'
+      scan_interval: 300
+
+    - platform: command_line
+      name: External Server Last Boot
+      command: "ssh jonas@192.168.8.189 'who -b'"
+      scan_interval: 300
+      value_template: >
+          {% set boot_info = value | replace('\n', '') %}
+          {% set boot_datetime = as_datetime(boot_info) %}
+          {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
+          {% set days = uptime_duration // (24 * 3600) %}
+          {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
+          {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
+
+    - platform: command_line
+      name: Disk Temperature
+      command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
+      unit_of_measurement: '°C'
+      scan_interval: 300
 
 script: !include scripts.yaml
 automation: !include automations.yaml
