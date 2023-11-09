@@ -127,9 +127,7 @@ command_line:
     - sensor:
           name: External Free RAM
           command: >
-              ssh jonas@192.168.8.189 << 'EOF'
-                free -m | awk '/Mem:/ {print $4}'
-              EOF
+              ssh jonas@192.168.8.189 'free -m | awk "/Mem:/ {print \$4}"'
           unit_of_measurement: 'MB'
           scan_interval: 300
 
