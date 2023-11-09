@@ -101,40 +101,41 @@ sensor:
           - 'time_utc'
           - 'beat'
 
-    - platform: command
-      name: Docker Status
-      command: 'ssh jonas@192.168.8.189 ''docker info --format "Total Containers: {{.Containers}} Running Containers: {{.ContainersRunning}} Paused Containers: {{.ContainersPaused}} Stopped Containers: {{.ContainersStopped}}"'''
-      scan_interval: 60 # Adjusted scan interval
+command_line:
+    - sensor:
+          name: Docker Status
+          command: 'ssh jonas@192.168.8.189 ''docker info --format "Total Containers: {{.Containers}} Running Containers: {{.ContainersRunning}} Paused Containers: {{.ContainersPaused}} Stopped Containers: {{.ContainersStopped}}'''
+          scan_interval: 60
 
-    - platform: command
-      name: Transmission Seed Status
-      command: "ssh jonas@192.168.8.189 'docker inspect -f {{.State.Status}} transmission_seed'"
-      scan_interval: 120 # Adjusted scan interval
+    - sensor:
+          name: Transmission Seed Status
+          command: "ssh jonas@192.168.8.189 'docker inspect -f {{.State.Status}} transmission_seed'"
+          scan_interval: 120
 
-    - platform: command
-      name: External Server CPU Load
-      command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
-      unit_of_measurement: '%'
-      value_template: '{{ value | round(1) }}'
-      scan_interval: 300
+    - sensor:
+          name: External Server CPU Load
+          command: "ssh jonas@192.168.8.189 'cat /proc/loadavg | awk {''print $1''}'"
+          unit_of_measurement: '%'
+          value_template: '{{ value | round(1) }}'
+          scan_interval: 300
 
-    - platform: command
-      name: External Server Last Boot
-      command: "ssh jonas@192.168.8.189 'who -b'"
-      scan_interval: 300
-      value_template: >
-          {% set boot_info = value | replace('\n', '') %}
-          {% set boot_datetime = as_datetime(boot_info) %}
-          {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
-          {% set days = uptime_duration // (24 * 3600) %}
-          {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
-          {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
+    - sensor:
+          name: External Server Last Boot
+          command: "ssh jonas@192.168.8.189 'who -b'"
+          scan_interval: 300
+          value_template: >
+              {% set boot_info = value | replace('\n', '') %}
+              {% set boot_datetime = as_datetime(boot_info) %}
+              {% set uptime_duration = (as_timestamp(now()) - as_timestamp(boot_datetime)) | int %}
+              {% set days = uptime_duration // (24 * 3600) %}
+              {% set hours = (uptime_duration % (24 * 3600)) // 3600 %}
+              {{ '{} day{} {} hour{} ago'.format(days, 's' if days > 1 else '', hours, 's' if hours > 1 else '') }}
 
-    - platform: command
-      name: Disk Temperature
-      command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
-      unit_of_measurement: '°C'
-      scan_interval: 300
+    - sensor:
+          name: Disk Temperature
+          command: "ssh jonas@192.168.8.189 'sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk ''{print $10}'' '"
+          unit_of_measurement: '°C'
+          scan_interval: 300
 
 person:
     - name: Jonas
