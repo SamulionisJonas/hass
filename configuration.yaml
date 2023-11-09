@@ -197,20 +197,28 @@ binary_sensor:
               friendly_name: 'Garage Gates Combined'
               value_template: "{{ is_state('binary_sensor.garage_gate1', 'off') and is_state('binary_sensor.garage_gate2', 'off') }}"
 
+wake_on_lan:
+    - mac_address: 'A8:23:FE:05:9C:7B'
+      name: 'LG TV'
 # LG TV
 media_player:
     - platform: webostv
+      name: webOS TV
       host: 192.168.8.73
-      name: LG TV
-      timeout: 5
+      mac: a8:23:fe:05:9c:7b
+      icon: mdi:television
+      customize:
+          sources:
+              - livetv
+              - youtube
+              - netflix
+              - plex
+              - hdmi1
+              - hdmi2
       turn_on_action:
-          service: switch.turn_on
-          entity_id: switch.lg
-
-switch:
-    - platform: wake_on_lan
-      name: lg
-      mac: 'A8:23:FE:05:9C:7B'
+          service: wake_on_lan.send_magic_packet
+          data:
+              mac: a8:23:fe:05:9c:7b
 
 script: !include scripts.yaml
 automation: !include automations.yaml
