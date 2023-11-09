@@ -151,7 +151,12 @@ views:
                       - loader
                   tap_action:
                       action: call-service
-                      service: media_player.turn_on
+                      service: >
+                          {% if is_state('media_player.playstation_4', 'on') %}
+                            media_player.turn_off
+                          {% else %}
+                            media_player.turn_on
+                          {% endif %}
                       target:
                           device_id:
                               - a7df8c02ee4644f4d77b8415fcb932aa
