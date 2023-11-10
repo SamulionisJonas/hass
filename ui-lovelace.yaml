@@ -109,7 +109,7 @@ views:
             cards:
                 - type: custom:button-card
                   entity: light.vardagsrum_group
-                  name: Belysning
+                  name: Xmas mode
                   template:
                       - light
                       - icon_xmas_tree
