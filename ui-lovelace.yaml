@@ -265,7 +265,7 @@ views:
                       - loader
 
                 - type: custom:button-card
-                  entity: media_player.samsung
+                  entity: media_player.chromecast
                   name: "Tv\u00B2"
                   double_tap_action: !include popup/sovrum_tv2.yaml
                   template:
