@@ -194,7 +194,7 @@ icon_santa_cole:
             [[[
               let state = variables.state_on && variables.timeout < 2000 ? 'on' : null;
               return `
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 953 1430" fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 953 1430" fill="none">
                   <style>
                     @keyframes on {
                       0% {
