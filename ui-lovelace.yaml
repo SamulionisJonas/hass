@@ -112,7 +112,7 @@ views:
                   name: Belysning
                   template:
                       - light
-                      - icon_hue
+                      - icon_xmas_tree
 
                 - type: custom:button-card
                   entity: light.vardagsrum_horna
