@@ -119,7 +119,7 @@ views:
                   name: Lempa
                   template:
                       - light
-                      - icon_shade
+                      - icon_santa_cole
 
                 - type: custom:button-card
                   entity: media_player.samsung_tv
