@@ -40,7 +40,8 @@
                 <b>
                 {% set lights = [
                   states.light.forest_side,
-                  states.light.terrasse
+                  states.light.terrasse,
+                  states.light.entrada
                 ] %}
 
                 {% set devices = [
