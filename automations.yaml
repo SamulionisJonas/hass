@@ -1,5 +1,5 @@
 - id: '1698481565022'
-  alias: Motion terrace lights on
+  alias: Terrace - turn on terrace lights on motion
   description: ''
   trigger:
   - platform: state
@@ -37,7 +37,7 @@
     domain: switch
   mode: single
 - id: '1698693759878'
-  alias: Soninis apsvietimas
+  alias: Forest - turn on lights on night fall
   description: ''
   trigger:
   - platform: time
@@ -54,5 +54,80 @@
   - type: turn_off
     device_id: 518ca2a7f6303b6656a20cb2b725bb8a
     entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
+    domain: switch
+  mode: single
+- id: '1700425616982'
+  alias: Entrance - turn on lights on motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.entrence_all_occupancy
+    - binary_sensor.carport_all_occupancy
+    to: 'on'
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
+  action:
+  - type: turn_on
+    device_id: aa4117474f58eaea7eab3f43b258c1fe
+    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
+    domain: switch
+  - wait_for_trigger:
+    - type: not_occupied
+      platform: device
+      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
+      entity_id: 3a62ef923b6ae64d51983d95a969cf57
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    timeout:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: aa4117474f58eaea7eab3f43b258c1fe
+    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
+    domain: switch
+  mode: single
+- id: '1700426149941'
+  alias: Entrence = turn lights on if doors opens
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pagrindinis_iejimas_contact
+    - binary_sensor.garazo_durys_contact
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
+  action:
+  - type: turn_on
+    device_id: aa4117474f58eaea7eab3f43b258c1fe
+    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
+    domain: switch
+  - wait_for_trigger:
+    - type: not_occupied
+      platform: device
+      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
+      entity_id: 3a62ef923b6ae64d51983d95a969cf57
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    timeout:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: aa4117474f58eaea7eab3f43b258c1fe
+    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
     domain: switch
   mode: single
