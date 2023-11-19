@@ -442,7 +442,7 @@ views:
                                   - icon_spot
 
                             - type: custom:button-card
-                              entity: light.entrance
+                              entity: switch.entrance
                               name: Įėjimas
                               template:
                                   - light
