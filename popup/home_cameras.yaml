@@ -16,10 +16,15 @@ browser_mod:
             - type: custom:frigate-card
               cameras:
                 - camera_entity: camera.carport
+                  live_provider: go2rtc
                 - camera_entity: camera.entrence
+                  live_provider: go2rtc
                 - camera_entity: camera.terrace_side
+                  live_provider: go2rtc
                 - camera_entity: camera.terrace_back
+                  live_provider: go2rtc
                 - camera_entity: camera.back
+                  live_provider: go2rtc
               live:
                 webrtc_card:
                   ui: true
