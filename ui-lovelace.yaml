@@ -205,10 +205,13 @@ views:
             view_layout:
                 grid-area: sovrum
             columns: 1
-            cards:
-                - type: custom:button-card
-                  entity: light.sovrum_group
-                  name: Sänglampor
+            entities:
+              - entity: sensor.today_energy_consumption
+                name: Today's Consumption
+              - entity: sensor.this_month_energy_consumption
+                name: Monthly Consumption
+              - entity: sensor.current_price
+                name: Current Price per kWh
                   
 
           #################################################
