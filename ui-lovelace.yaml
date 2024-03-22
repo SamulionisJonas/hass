@@ -206,14 +206,13 @@ views:
             columns: 1
             cards:
                 - type: entities
-                  title: Energy Consumption
                   entities:
-                    - entity: sensor.today_energy_consumption
-                      name: Today's Consumption
-                    - entity: sensor.this_month_energy_consumption
-                      name: Monthly Consumption
-                    - entity: sensor.current_price
-                      name: Current Price per kWh
+                    - entity: sensor.daily_energy
+                      name: Šiandienos
+                    - entity: sensor.monthly_energy
+                      name: Mėnesio
+                    - entity: sensor.nordpool_price
+                      name: Kaina dabar Eur/kWh
 
           #################################################
           #                                               #
