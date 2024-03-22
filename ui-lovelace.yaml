@@ -398,19 +398,10 @@ views:
                                   - loader
 
                             - type: custom:button-card
-                              name: Vartai
+                              name: Kameros
                               template:
                                   - base
-                                  - loader
-                              entity: binary_sensor.garage_gates_combined # Use the combined binary sensor entity
-                              state:
-                                  - value: 'on'
-                                    icon: 'mdi:gate-closed'
-                                  - value: 'off'
-                                    icon: 'mdi:gate-open'
                               tap_action: !include popup/home_cameras.yaml
-
-                            
 
                       - type: grid
                         columns: 2
