@@ -187,12 +187,12 @@ views:
                       - light
                       - icon_spot
 
-               - type: custom:button-card
-                  entity: light.entrada
-                  name: Įėjimas
-                  template:
-                      - light
-                      - icon_spot
+                - type: custom:button-card
+                    entity: light.entrada
+                    name: Įėjimas
+                    template:
+                        - light
+                        - icon_spot
 
           #################################################
           #                                               #
