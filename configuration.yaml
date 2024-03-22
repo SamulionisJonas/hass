@@ -78,9 +78,9 @@ sensor:
       additional_costs: |
           {% set s = {
               "day_night_switch_hour": 23,
-              "night_rate": 0.04719,
-              "day_rate": 0.07865,
-              "cert": 0.01
+              "night_rate": 0.05,
+              "day_rate": 0.085,
+              "cert": 0.045
           }
           %}
 
@@ -99,7 +99,6 @@ sensor:
           - 'date_time_iso'
           - 'time_date'
           - 'time_utc'
-          - 'beat'
 shell_command:
     turn_on_ps4: ps4-waker
 

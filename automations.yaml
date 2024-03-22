@@ -1,41 +1,3 @@
-- id: '1698481565022'
-  alias: Terrace - turn on terrace lights on motion
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.terrace_back_all_occupancy
-    - binary_sensor.terrace_side_all_occupancy
-    to: 'on'
-  condition:
-  - condition: sun
-    before: sunrise
-    after: sunset
-  action:
-  - type: turn_on
-    device_id: 8b10ee579284be670cf7b94bbd34206b
-    entity_id: 0a5d50b268f438eb3acefc0dedc5a5cf
-    domain: switch
-  - wait_for_trigger:
-    - type: not_occupied
-      platform: device
-      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
-      entity_id: 3a62ef923b6ae64d51983d95a969cf57
-      domain: binary_sensor
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
-    timeout:
-      hours: 0
-      minutes: 5
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 8b10ee579284be670cf7b94bbd34206b
-    entity_id: 0a5d50b268f438eb3acefc0dedc5a5cf
-    domain: switch
-  mode: single
 - id: '1698693759878'
   alias: Forest - turn on lights on night fall
   description: ''
@@ -56,44 +18,6 @@
     entity_id: bec7e3dbbe0214f07160cc79c41ec8ab
     domain: switch
   mode: single
-- id: '1700425616982'
-  alias: Entrance - turn on lights on motion
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.entrence_all_occupancy
-    - binary_sensor.carport_all_occupancy
-    to: 'on'
-  condition:
-  - condition: sun
-    before: sunrise
-    after: sunset
-  action:
-  - type: turn_on
-    device_id: aa4117474f58eaea7eab3f43b258c1fe
-    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
-    domain: switch
-  - wait_for_trigger:
-    - type: not_occupied
-      platform: device
-      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
-      entity_id: 3a62ef923b6ae64d51983d95a969cf57
-      domain: binary_sensor
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
-    timeout:
-      hours: 0
-      minutes: 10
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: aa4117474f58eaea7eab3f43b258c1fe
-    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
-    domain: switch
-  mode: single
 - id: '1700426149941'
   alias: Entrence = turn lights on if doors opens
   description: ''
@@ -111,16 +35,7 @@
     device_id: aa4117474f58eaea7eab3f43b258c1fe
     entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
     domain: switch
-  - wait_for_trigger:
-    - type: not_occupied
-      platform: device
-      device_id: 23ff82f1ac1ea48e320f8bbffc5e42b3
-      entity_id: 3a62ef923b6ae64d51983d95a969cf57
-      domain: binary_sensor
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
+  - wait_for_trigger: []
     timeout:
       hours: 0
       minutes: 5
@@ -130,4 +45,42 @@
     device_id: aa4117474f58eaea7eab3f43b258c1fe
     entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
     domain: switch
+  mode: single
+- id: '1711057566845'
+  alias: Back home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.lauko_vartai
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
+    after_offset: '2'
+  action:
+  - service: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - light.entrada
+      - light.terrasse
+      - light.shellypro4pm_34987a68f204_switch_3
+      - light.shellypro4pm_34987a68f204_switch_0
+      - light.shellyplus1_c82e180bd154_switch_0
+      - light.shellypro4pm_34987a68f204_switch_1
+  - wait_for_trigger: []
+    timeout:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - light.entrada
+      - light.terrasse
   mode: single
