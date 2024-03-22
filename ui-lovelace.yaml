@@ -160,62 +160,38 @@ views:
           #################################################
 
           - type: grid
-            title: Studio
+            title: Laukas
             view_layout:
                 grid-area: studio
             columns: 2
             cards:
                 - type: custom:button-card
-                  entity: light.studio_dator
-                  name: Datorlampa
-                  template:
-                      - light
-                      - icon_hue
-
-                - type: custom:button-card
-                  entity: light.studio_group
-                  name: Taklampor
+                  entity: light.terrasse
+                  name: Terasa
                   template:
                       - light
                       - icon_spot
 
                 - type: custom:button-card
-                  entity: switch.imac
-                  name: Dator
-                  double_tap_action: !include popup/studio_dator.yaml
+                  entity: light.forest_side
+                  name: Miškas
                   template:
-                      - base
-                      - icon_imac
-                      - loader
-                      - lock
-                  variables:
-                      lock: >
-                          [[[
-                            let lock = states['input_boolean.imac_lock'];
-                            return !lock || lock.state;
-                          ]]]
-                      trigger: >
-                          [[[
-                            let trigger = states['script.home_leave'];
-                            return !trigger || trigger;
-                          ]]]
+                      - light
+                      - icon_spot
 
                 - type: custom:button-card
-                  entity: switch.gosund_monitors_switch
-                  name: Monitorer
-                  double_tap_action: !include popup/studio_monitorer.yaml
+                  entity: light.plants
+                  name: Augalai
                   template:
-                      - base
-                      - icon_monitors
-                      - circle
-                      - loader
-                  variables:
-                      circle_input: >
-                          [[[
-                            let volume = states['sensor.monitors_volume'];
-                            if (volume) return parseInt(volume.state);
-                          ]]]
-                      circle_input_unit: '%'
+                      - light
+                      - icon_spot
+
+               - type: custom:button-card
+                  entity: light.entrada
+                  name: Įėjimas
+                  template:
+                      - light
+                      - icon_spot
 
           #################################################
           #                                               #
