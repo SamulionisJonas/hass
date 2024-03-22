@@ -165,6 +165,7 @@ views:
                 grid-area: studio
             columns: 2
             cards:
+
                 - type: custom:button-card
                   entity: light.terrasse
                   name: Terasa
