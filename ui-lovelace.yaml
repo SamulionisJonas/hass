@@ -205,7 +205,7 @@ views:
                 grid-area: sovrum
             columns: 1
             cards:
-                - type: energy
+                - type: grid
                   title: Energy Consumption
                   entities:
                     - entity: sensor.today_energy_consumption
