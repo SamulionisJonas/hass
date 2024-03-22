@@ -102,7 +102,7 @@ views:
           #################################################
 
           - type: grid
-            title: Salionas
+            title: Namai
             view_layout:
                 grid-area: vardagsrum
             columns: 2
@@ -209,9 +209,7 @@ views:
                 - type: custom:button-card
                   entity: light.sovrum_group
                   name: Sänglampor
-                  template:
-                      - light
-                      - icon_lamp
+                  
 
           #################################################
           #                                               #
@@ -357,38 +355,11 @@ views:
                         cards:
                             - type: custom:button-card
                               entity: light.terrasse
-                              name: Terasa
+                              name: Garažas
                               template:
                                   - light
                                   - base
                                   - icon_spot
-
-                            - type: custom:button-card
-                              entity: light.forest_side
-                              name: Miškas
-                              template:
-                                  - light
-                                  - icon_spot
-
-                            - type: custom:button-card
-                              entity: media_player.samsung_tv
-                              name: Tv
-                              state_display: >
-                                  [[[
-                                    if (variables.state === 'on') {
-                                        return 'Įjungtas';
-                                    } else {
-                                      return 'Išjungtas'
-                                    }
-                                    if (variables.state === true) {
-                                        return variables.translate_unknown;
-                                    }
-                                  ]]]
-                              double_tap_action: !include popup/vardagsrum_tv.yaml
-                              template:
-                                  - base
-                                  - icon_tv
-                                  - loader
 
                             - type: custom:button-card
                               name: Vartai
@@ -402,6 +373,36 @@ views:
                                   - value: 'off'
                                     icon: 'mdi:gate-open'
                               tap_action: !include popup/home_garage.yaml
+
+                            - type: custom:button-card
+                              entity: media_player.chromecast
+                              name: "Tv\u00B2"
+                              state_display: >
+                                  [[[
+                                    if (variables.state === 'on') {
+                                        return 'Įjungtas';
+                                    } else {
+                                      return 'Išjungtas'
+                                    }
+                                    if (variables.state === true) {
+                                        return variables.translate_unknown;
+                                    }
+                                  ]]]
+                              double_tap_action: !include popup/sovrum_tv2.yaml
+                              template:
+                                  - base
+                                  - icon_tv
+                                  - loader
+
+                            - type: custom:button-card
+                              entity: light.terrasse
+                              name: Kameros
+                              template:
+                                  - light
+                                  - base
+                                  - icon_spot
+
+                            
 
                       - type: grid
                         columns: 2
@@ -420,7 +421,7 @@ views:
           #################################################
 
           - type: grid
-            title: Namai
+            title: Statusas
             view_layout:
                 grid-area: hemma
             columns: 2
@@ -451,7 +452,7 @@ views:
 
                 - type: custom:button-card
                   entity: script.home_leave
-                  name: Stäng allt
+                  name: Viską išjungti
                   template:
                       - base
                       - icon_away
