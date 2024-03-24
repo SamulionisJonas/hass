@@ -205,16 +205,21 @@ views:
                 grid-area: sovrum
             columns: 1
             cards:
-                - type: custom:button-card
-                  template:
-                      - base
-                  entities:
-                    - entity: sensor.daily_energy
-                      name: Šiandienos
-                    - entity: sensor.monthly_energy
-                      name: Mėnesio
-                    - entity: sensor.nordpool_price
-                      name: Kaina dabar Eur/kWh
+                - type: "custom:button-card"
+                  template: custom_card_damix48_power_details
+                  entity: sensor.shellyem_id_channel_1_power
+                  variables:
+                    ulm_card_power_details_name: Power
+                    ulm_card_power_details_entity: sensor.daily_energy
+                    ulm_card_power_details_hours: 2
+                    ulm_card_power_details_24hour: true
+                    ulm_card_power_details_thresholds:
+                      - value: 0
+                        color: "#43A047"
+                      - value: 2500
+                        color: "#FFA600"
+                      - value: 3000
+                        color: "#DB4437"
 
           #################################################
           #                                               #

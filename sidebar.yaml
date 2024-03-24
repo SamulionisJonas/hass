@@ -1,144 +1,144 @@
 - sensor:
-      - unique_id: sidebar
-        state: template
-        attributes:
-            time: >
-                {% set hours = now().strftime('%H') %}
-                {% set minutes = now().strftime('%M') %}
-                <span class="time">
-                  {{ hours }}<span class="time-colon">:</span>{{ minutes }}
-                </span>
-            date: >
-                <font color='#6a7377'><b>
-                {% if strptime(states('sensor.date'), '%Y-%m-%d').day != None %}
-                {% set days = ['Pirmadienis', 'Antradienis', 'Trečiadienis', 'Ketvirtadienis', 'Penktadienis', 'Šeštadienis', 'Sekmadienis'] %}
-                {% set months = ['Sausio', 'Vasario', 'Kovo', 'Balandžio', 'Gegužės', 'Birželio',
-                'Liepos', 'Rugpjūčio', 'Rugsėjo', 'Spalio', 'Lapkričio', 'Gruodžio'] %}
-                  {{ days[now().weekday()] }}<br>
-                  {{ months[now().month-1] }} {{ strptime(states('sensor.date'), '%Y-%m-%d').day }} diena
-                {% endif %}
-                </b></font>
-            greet: >
-                <b>
-                {% set time = now().hour %}
-                {% if time <= 1 %} Labos nakties {{'\U0001F611'}}
-                {% elif time <= 3 %} Labos nakties {{'\U0001F62A'}}
-                {% elif time <= 5 %} Labos nakties {{'\U0001F634'}}
-                {% elif time <= 7 %} Labas rytas {{'\U0001F4A9'}}
-                {% elif time <= 9 %} Labas rytas {{'\u2615\uFE0F'}}
-                {% elif time <= 10 %} Labas rytas {{'\U0001F642'}}
-                {% elif time <= 13 %} Laba diena {{'\U0001F60A'}}
-                {% elif time <= 15 %} Laba diena {{'\U0001F60E'}}
-                {% elif time <= 17 %} Labas vakaras {{'\U0001F44B\U0001F3FB'}}
-                {% elif time <= 18 %} Labas vakaras {{'\U0001F44B\U0001F3FB'}}
-                {% elif time <= 22 %} Labas vakaras {{'\U0001F60C'}}
-                {% elif time <= 23 %} Labas vakaras {{'\U0001F974'}}
-                {% else %} Labas vakaras {{'\U0001F974'}}
-                {% endif %}
-                </b>
-            active: >
-                <b>
-                {% set lights = [
-                  states.light.forest_side,
-                  states.light.terrasse,
-                  states.light.entrada,
-                  light.plants,
-                ] %}
+    - unique_id: sidebar
+      state: template
+      attributes:
+        time: >
+          {% set hours = now().strftime('%H') %}
+          {% set minutes = now().strftime('%M') %}
+          <span class="time">
+            {{ hours }}<span class="time-colon">:</span>{{ minutes }}
+          </span>
+        date: >
+          <font color='#6a7377'><b>
+          {% if strptime(states('sensor.date'), '%Y-%m-%d').day != None %}
+          {% set days = ['Pirmadienis', 'Antradienis', 'Trečiadienis', 'Ketvirtadienis', 'Penktadienis', 'Šeštadienis', 'Sekmadienis'] %}
+          {% set months = ['Sausio', 'Vasario', 'Kovo', 'Balandžio', 'Gegužės', 'Birželio',
+          'Liepos', 'Rugpjūčio', 'Rugsėjo', 'Spalio', 'Lapkričio', 'Gruodžio'] %}
+            {{ days[now().weekday()] }}<br>
+            {{ months[now().month-1] }} {{ strptime(states('sensor.date'), '%Y-%m-%d').day }} diena
+          {% endif %}
+          </b></font>
+        greet: >
+          <b>
+          {% set time = now().hour %}
+          {% if time <= 1 %} Labos nakties {{'\U0001F611'}}
+          {% elif time <= 3 %} Labos nakties {{'\U0001F62A'}}
+          {% elif time <= 5 %} Labos nakties {{'\U0001F634'}}
+          {% elif time <= 7 %} Labas rytas {{'\U0001F4A9'}}
+          {% elif time <= 9 %} Labas rytas {{'\u2615\uFE0F'}}
+          {% elif time <= 10 %} Labas rytas {{'\U0001F642'}}
+          {% elif time <= 13 %} Laba diena {{'\U0001F60A'}}
+          {% elif time <= 15 %} Laba diena {{'\U0001F60E'}}
+          {% elif time <= 17 %} Labas vakaras {{'\U0001F44B\U0001F3FB'}}
+          {% elif time <= 18 %} Labas vakaras {{'\U0001F44B\U0001F3FB'}}
+          {% elif time <= 22 %} Labas vakaras {{'\U0001F60C'}}
+          {% elif time <= 23 %} Labas vakaras {{'\U0001F974'}}
+          {% else %} Labas vakaras {{'\U0001F974'}}
+          {% endif %}
+          </b>
+        active: >
+          <b>
+          {% set lights = [
+            states.light.forest_side,
+            states.light.terrasse,
+            states.light.entrada,
+            light.plants,
+          ] %}
 
-                {% set devices = [
-                  states.media_player.samsung_tv
-                ] %}
+          {% set devices = [
+            states.media_player.samsung_tv
+          ] %}
 
-                {% set lights_on = lights | selectattr('state','eq','on') | list %}
-                {% set lights_name = lights | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
+          {% set lights_on = lights | selectattr('state','eq','on') | list %}
+          {% set lights_name = lights | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
 
-                {% set devices_on = devices | selectattr('state','search','(on|cool|fan_only|playing)') | list %}
-                {% set devices_name = devices_on | map(attribute='name') | join(', ') %}
+          {% set devices_on = devices | selectattr('state','search','(on|cool|fan_only|playing)') | list %}
+          {% set devices_name = devices_on | map(attribute='name') | join(', ') %}
 
-                {% if (lights_on | length == 0) and (devices_on | length > 0) %}
-                  {{ devices_name | regex_replace(',([^,]*)$',' ir \\1') }} įjungti
+          {% if (lights_on | length == 0) and (devices_on | length > 0) %}
+            {{ devices_name | regex_replace(',([^,]*)$',' ir \\1') }} įjungti
 
-                {% elif (lights_on | length == 1) and (devices_on | length == 1) %}
-                  {{ lights_name }} ir {{devices_name }} įjungti
+          {% elif (lights_on | length == 1) and (devices_on | length == 1) %}
+            {{ lights_name }} ir {{devices_name }} įjungti
 
-                {% elif (lights_on | length == 1) and (devices_on | length > 1) %}
-                  {{ lights_name }}, {{ devices_name | regex_replace(',([^,]*)$',' ir\\1') }} įjungti
+          {% elif (lights_on | length == 1) and (devices_on | length > 1) %}
+            {{ lights_name }}, {{ devices_name | regex_replace(',([^,]*)$',' ir\\1') }} įjungti
 
-                {% elif (lights_on | length > 1) and (devices_on | length == 1) %}
-                  {{ lights_on | length }} lempos ir {{ devices_name }} įjungtos
+          {% elif (lights_on | length > 1) and (devices_on | length == 1) %}
+            {{ lights_on | length }} lempos ir {{ devices_name }} įjungtos
 
-                {% elif (lights_on | length > 1) and (devices_on | length > 1) %}
-                  {{ lights_on | length }} lampor, {{ devices_name | regex_replace(',([^,]*)$',' ir\\1') }} įjungtos
+          {% elif (lights_on | length > 1) and (devices_on | length > 1) %}
+            {{ lights_on | length }} lampor, {{ devices_name | regex_replace(',([^,]*)$',' ir\\1') }} įjungtos
 
-                {% elif (lights_on | length == 1) and (devices_on | length == 0) %}
-                  {{ lights_name }} įjungtos
+          {% elif (lights_on | length == 1) and (devices_on | length == 0) %}
+            {{ lights_name }} įjungtos
 
-                {% elif (lights_on | length > 1) and (devices_on | length == 0) %}
-                  {{ lights_on | length }} lempos įjungtos
+          {% elif (lights_on | length > 1) and (devices_on | length == 0) %}
+            {{ lights_on | length }} lempos įjungtos
 
-                {% else %}
-                  <font color='#6a7377'>Viskas išjungta</font>
-                {% endif %}
-                </b>
-            vacuum: >
-                {% set entity_id = 'vacuum.roborock_s7' %}
-                {% if is_state(entity_id, 'cleaning') %}
-                  <b>Siurbia</b>
-                {% elif is_state(entity_id, 'returning') %}
-                  <b>Siurblys baigė darbus</b>
-                {% endif %}
-            weather: >
-                {% set entity = 'weather.openweathermap' %}
-                {% if not is_state(entity, 'unknown') %}
-                  {% set temp = state_attr(entity, 'temperature') | round %}
-                  {% set precip = state_attr(entity, 'forecast')[0]['precipitation'] | round %}
-                    Jaučiasi kaip {{ temp }}°, {{ 'kritulių nenusimato' if precip == 0
-                    else "nusimato " + precip | string + 'mm kritulių \u2614\uFE0F' }}
-                {% else %}
-                  Nepavyko įkelti orų...
-                {% endif %}
-            battery: >
-                {% set entities = states.sensor
-                  | selectattr('entity_id', 'search', 'battery')
-                  | rejectattr('entity_id', 'search', 'iphone')
-                  | rejectattr('entity_id', 'search', 'ipad')
-                  | rejectattr('entity_id', 'search', 'Macbook')
-                  | map(attribute = 'entity_id') | list %}
-                {% for sensor in entities if states(sensor) != 'unknown' and states(sensor) !=
-                  'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}
-                  Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
-                  {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
-                {% endfor %}
-            doors_open: >
-                <b>
-                {% set gates = [
-                    states.binary_sensor.garazo_vartai_contact,
-                    states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
-                ] %}
+          {% else %}
+            <font color='#6a7377'>Viskas išjungta</font>
+          {% endif %}
+          </b>
+        vacuum: >
+          {% set entity_id = 'vacuum.roborock_s7' %}
+          {% if is_state(entity_id, 'cleaning') %}
+            <b>Siurbia</b>
+          {% elif is_state(entity_id, 'returning') %}
+            <b>Siurblys baigė darbus</b>
+          {% endif %}
+        weather: >
+          {% set entity = 'weather.openweathermap' %}
+          {% if not is_state(entity, 'unknown') %}
+            {% set temp = state_attr(entity, 'temperature') | round %}
+            {% set precip = state_attr(entity, 'forecast')[0]['precipitation'] | round %}
+              Jaučiasi kaip {{ temp }}°, {{ 'kritulių nenusimato' if precip == 0
+              else "nusimato " + precip | string + 'mm kritulių \u2614\uFE0F' }}
+          {% else %}
+            Nepavyko įkelti orų...
+          {% endif %}
+        battery: >
+          {% set entities = states.sensor
+            | selectattr('entity_id', 'search', 'battery')
+            | rejectattr('entity_id', 'search', 'iphone')
+            | rejectattr('entity_id', 'search', 'ipad')
+            | rejectattr('entity_id', 'search', 'Macbook')
+            | map(attribute = 'entity_id') | list %}
+          {% for sensor in entities if states(sensor) != 'unknown' and states(sensor) !=
+            'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}
+            Baterija {% if loop.first %} {{'\u26A0\uFE0F'}} {% else %}, {% endif %}
+            {{ state_attr(sensor, 'friendly_name') }} {{ states(sensor) }}%
+          {% endfor %}
+        doors_open: >
+          <b>
+          {% set gates = [
+              states.binary_sensor.garazo_vartai_contact,
+              states.binary_sensor.shellyplus1_7c87ce63c130_input_0_input,
+          ] %}
 
-                {% set other_doors = [
-                    states.binary_sensor.garazo_durys_contact,
-                    states.binary_sensor.katlines_durys_contact,
-                    states.binary_sensor.lauko_vartai,
-                ] %}
+          {% set other_doors = [
+              states.binary_sensor.garazo_durys_contact,
+              states.binary_sensor.katlines_durys_contact,
+              states.binary_sensor.lauko_vartai,
+          ] %}
 
-                {% set gates_open = gates | selectattr('state', 'eq', 'on') | list %}
-                {% set other_doors_open = other_doors | selectattr('state', 'eq', 'on') | list %}
+          {% set gates_open = gates | selectattr('state', 'eq', 'on') | list %}
+          {% set other_doors_open = other_doors | selectattr('state', 'eq', 'on') | list %}
 
-                {% set gates_name = gates_open | map(attribute='name') | join(' ir ') if gates_open | length > 1 else gates_open | map(attribute='name') | join('') %}
-                {% set other_doors_name = other_doors_open | map(attribute='name') | join(' ir ') if other_doors_open | length > 1 else other_doors_open | map(attribute='name') | join('') %}
+          {% set gates_name = gates_open | map(attribute='name') | join(' ir ') if gates_open | length > 1 else gates_open | map(attribute='name') | join('') %}
+          {% set other_doors_name = other_doors_open | map(attribute='name') | join(' ir ') if other_doors_open | length > 1 else other_doors_open | map(attribute='name') | join('') %}
 
-                {% if gates_open | length > 1 %}
-                    {{ gates_name }} atidaryti
-                {% elif gates_open | length == 1 and other_doors_open | length > 0 %}
-                    {{ gates_name }} ir {{ other_doors_name | default('Durys') }} atidarytos
-                {% elif gates_open | length == 1 and other_doors_open | length == 0 %}
-                    {{ gates_name }} atidaryti
-                {% elif other_doors_open | length == 1 and gates_open | length > 0 %}
-                    {{ other_doors_name }} atidarytos
-                {% elif other_doors_open | length == 1 and gates_open | length == 0 %}
-                    {{ other_doors_name }} atidaryta
-                {% else %}
-                    <font color='#6a7377'>Viskas uždaryta</font>
-                {% endif %}
-                </b>
+          {% if gates_open | length > 1 %}
+              {{ gates_name }} atidaryti
+          {% elif gates_open | length == 1 and other_doors_open | length > 0 %}
+              {{ gates_name }} ir {{ other_doors_name | default('Durys') }} atidarytos
+          {% elif gates_open | length == 1 and other_doors_open | length == 0 %}
+              {{ gates_name }} atidaryti
+          {% elif other_doors_open | length == 1 and gates_open | length > 0 %}
+              {{ other_doors_name }} atidarytos
+          {% elif other_doors_open | length == 1 and gates_open | length == 0 %}
+              {{ other_doors_name }} atidaryta
+          {% else %}
+              <font color='#6a7377'>Viskas uždaryta</font>
+          {% endif %}
+          </b>
