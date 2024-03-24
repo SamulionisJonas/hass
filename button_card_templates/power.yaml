@@ -26,7 +26,7 @@ custom_card_damix48_power_details:
         type: "custom:button-card"
         template:
           - "icon_info"
-          - "card_generic_swap"
+          - "base"
         entity: "[[[ return entity.entity_id ]]]"
         variables:
           ulm_card_generic_swap_name: "[[[ return variables.ulm_card_power_details_name ]]]"
