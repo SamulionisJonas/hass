@@ -207,7 +207,7 @@ views:
             cards:
                 - type: "custom:button-card"
                   template: custom_card_damix48_power_details
-                  entity: sensor.shellyem_id_channel_1_power
+                  entity: sensor.daily_energy
                   variables:
                     ulm_card_power_details_name: Power
                     ulm_card_power_details_entity: sensor.daily_energy
