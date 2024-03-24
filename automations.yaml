@@ -35,16 +35,16 @@
     device_id: aa4117474f58eaea7eab3f43b258c1fe
     entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
     domain: switch
-  - wait_for_trigger: []
-    timeout:
+  - delay:
       hours: 0
       minutes: 5
       seconds: 0
       milliseconds: 0
   - type: turn_off
     device_id: aa4117474f58eaea7eab3f43b258c1fe
-    entity_id: bf0f2545c87b6a33c8062eec7a04d8e1
-    domain: switch
+    entity_id: a58f657d6daec5594cf2ed78b7b38f46
+    domain: light
+    enabled: true
   mode: single
 - id: '1711057566845'
   alias: Back home
@@ -57,7 +57,10 @@
   - condition: sun
     before: sunrise
     after: sunset
-    after_offset: '2'
+    after_offset: '1'
+  - condition: state
+    entity_id: person.jonas
+    state: not_home
   action:
   - service: light.turn_on
     metadata: {}
@@ -70,8 +73,8 @@
       - light.shellypro4pm_34987a68f204_switch_0
       - light.shellyplus1_c82e180bd154_switch_0
       - light.shellypro4pm_34987a68f204_switch_1
-  - wait_for_trigger: []
-    timeout:
+      - light.forest_side
+  - delay:
       hours: 0
       minutes: 10
       seconds: 0
@@ -83,4 +86,20 @@
       entity_id:
       - light.entrada
       - light.terrasse
+  mode: single
+- id: '1711300477459'
+  alias: Wake up
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.svetaine_motion
+    - binary_sensor.pagrindinis_iejimas_contact
+    - binary_sensor.koridorius_motion
+  condition: []
+  action:
+  - service: notify.mobile_app_ipad_2
+    metadata: {}
+    data:
+      message: Wake up
   mode: single

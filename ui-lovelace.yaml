@@ -169,28 +169,28 @@ views:
                   entity: light.terrasse
                   name: Terasa
                   template:
-                      - light
+                      - base
                       - icon_spot
 
                 - type: custom:button-card
                   entity: light.forest_side
                   name: Miškas
                   template:
-                      - light
+                      - base
                       - icon_spot
 
                 - type: custom:button-card
                   entity: light.plants
                   name: Augalai
                   template:
-                      - light
+                      - base
                       - icon_spot
 
                 - type: custom:button-card
                   entity: light.entrada
                   name: Įėjimas
                   template:
-                      - light
+                      - base
                       - icon_spot
 
           #################################################
@@ -205,7 +205,9 @@ views:
                 grid-area: sovrum
             columns: 1
             cards:
-                - type: entities
+                - type: custom:button-card
+                  template:
+                      - base
                   entities:
                     - entity: sensor.daily_energy
                       name: Šiandienos
@@ -360,7 +362,6 @@ views:
                               entity: light.terrasse
                               name: Garažas
                               template:
-                                  - light
                                   - base
                                   - icon_spot
 
@@ -410,7 +411,7 @@ views:
                               entity: light.hall_group
                               name: Vartai
                               template:
-                                  - light
+                                  - base
                                   - icon_spot
 
           #################################################

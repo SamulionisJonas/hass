@@ -41,7 +41,8 @@
                 {% set lights = [
                   states.light.forest_side,
                   states.light.terrasse,
-                  states.light.entrada
+                  states.light.entrada,
+                  light.plants,
                 ] %}
 
                 {% set devices = [
@@ -101,6 +102,7 @@
                   | selectattr('entity_id', 'search', 'battery')
                   | rejectattr('entity_id', 'search', 'iphone')
                   | rejectattr('entity_id', 'search', 'ipad')
+                  | rejectattr('entity_id', 'search', 'Macbook')
                   | map(attribute = 'entity_id') | list %}
                 {% for sensor in entities if states(sensor) != 'unknown' and states(sensor) !=
                   'unavailable' and states(sensor) != 'None' and states(sensor) | int(default=0) <= 5 %}

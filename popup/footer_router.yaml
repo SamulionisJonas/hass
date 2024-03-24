@@ -24,8 +24,10 @@ browser_mod:
             # - entity: binary_sensor.template_udm_internet
             #   secondary_info: last-changed
 
-            - entity: sensor.template_udm_cpu_temp
-              name: CPU Temperatur
+            - entity: sensor.total_down
+              name: Parsisiuntimas
+            - entity: sensor.total_up
+              name: Išsiuntimas
 
             - type: custom:bar-card
               width: 55%
