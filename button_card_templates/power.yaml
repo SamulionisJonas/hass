@@ -63,7 +63,7 @@ custom_card_damix48_power_details:
         type: "custom:mini-graph-card"
         template:
           - "icon_info"
-          - "card_generic"
+          - "base"
         entities:
           - entity: "[[[ return variables.ulm_card_power_details_entity ]]]"
         color_thresholds: |
